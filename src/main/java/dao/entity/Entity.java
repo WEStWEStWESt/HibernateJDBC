@@ -16,11 +16,11 @@ public class Entity {
         this.id = id;
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

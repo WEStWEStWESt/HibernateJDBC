@@ -11,10 +11,10 @@ public class AnswerTableImplementation extends AbstractTableImplementation {
         int result = 0;
         String answer = answers.getAnswer();
         if (selectEntity(answer,
-                         SqlQuery.SELECT_QUESTION.getSql(),
-                         connection) == null){
+                         SqlQuery.SELECT_ANSWER.getSql(),
+                         connection) < 0){
             result = insertEntity(answer,
-                     SqlQuery.INSERT_QUESTION.getSql(),
+                     SqlQuery.INSERT_ANSWER.getSql(),
                      connection);
         }
         return result;

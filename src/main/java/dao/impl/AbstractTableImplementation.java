@@ -13,21 +13,22 @@ class AbstractTableImplementation {
     final int SECOND_ARGUMENT = 2;
     final String ID = "id";
     final String NAME = "name";
+    final String QUESTION = "question";
 
-    Entity selectEntity(String content, String sql, Connection connection) throws SQLException {
+    int selectEntity(String content, String sql, Connection connection) throws SQLException {
         ResultSet resultSet = null;
-        Entity entity = null;
-
+        int result = -1;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(FIRST_ARGUMENT, content);
             resultSet = statement.executeQuery();
 
-            if (resultSet.next())
-                entity = new Entity(resultSet.getInt(ID), resultSet.getString(NAME));
+            if (resultSet.next()) {
+                result = resultSet.getInt(ID);
+            }
         } finally {
             JdbcManager.closeResultSet(resultSet);
         }
-        return entity;
+        return result;
     }
 
     int insertEntity(String content, String sql, Connection connection) throws SQLException {

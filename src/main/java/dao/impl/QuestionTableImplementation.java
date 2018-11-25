@@ -14,7 +14,7 @@ public class QuestionTableImplementation extends AbstractTableImplementation {
         String question = questions.getQuestion();
         if (selectEntity(question,
                          SqlQuery.SELECT_QUESTION.getSql(),
-                         connection) == null){
+                         connection) < 0){
             result = insertEntity(question,
                                   SqlQuery.INSERT_QUESTION.getSql(),
                                   connection);
