@@ -10,9 +10,15 @@ public class UserTableImplementation extends AbstractTableImplementation{
 
     public int addUser(Users users) throws SQLException {
         int result = 0;
+        String name;
         try (Connection connection = JdbcManager.connection()) {
-            if (selectEntity(users.getName(), SqlQuery.SELECT_USER.getSql(), connection) == null) {
-                result = insertEntity(users.getName(), SqlQuery.INSERT_USER.getSql(), connection);
+            name = users.getName();
+            if (selectEntity(name,
+                    SqlQuery.SELECT_USER.getSql(),
+                    connection) == null) {
+                result = insertEntity(name,
+                         SqlQuery.INSERT_USER.getSql(),
+                         connection);
             }
         }
         return result;

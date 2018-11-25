@@ -4,10 +4,10 @@ public class Entity {
     private int id;
     private String content;
 
-    public Entity() {
+    Entity() {
     }
 
-    public Entity(String content) {
+    Entity(String content) {
         this.content = content;
     }
 
@@ -16,19 +16,19 @@ public class Entity {
         this.id = id;
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
-    public String getContent() {
+    String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    void setContent(String content) {
         this.content = content;
     }
 }
