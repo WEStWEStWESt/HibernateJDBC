@@ -1,40 +1,28 @@
 package dao.entity;
 
-public class Users {
-
-    private int id;
-    private String name;
+public class Users extends Entity{
 
     public Users() {
     }
 
     public Users(String name) {
-        this.name = name;
+        super(name);
     }
 
     public Users(int id, String name) {
-        this(name);
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        super(id, name);
     }
 
     public String getName() {
-        return name;
+        return getContent();
     }
 
     public void setName(String name) {
-        this.name = name;
+        setContent(name);
     }
 
     @Override
     public String toString() {
-        return name;
+        return getContent();
     }
 }

@@ -1,40 +1,28 @@
 package dao.entity;
 
-public class Answers {
-
-    private int id;
-    private String answer;
+public class Answers extends Entity{
 
     public Answers() {
     }
 
     public Answers(String answer) {
-        this.answer = answer;
+        super(answer);
     }
 
     public Answers(int id, String answer) {
-        this(answer);
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+       super(id, answer);
     }
 
     public String getAnswer() {
-        return answer;
+        return getContent();
     }
 
     public void setAnswer(String answer) {
-        this.answer = answer;
+        setContent(answer);
     }
 
     @Override
     public String toString() {
-        return answer;
+        return getContent();
     }
 }
