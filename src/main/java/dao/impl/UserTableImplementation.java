@@ -14,11 +14,11 @@ public class UserTableImplementation extends AbstractTableImplementation{
         try (Connection connection = JdbcManager.connection()) {
             name = users.getName();
             if (selectEntity(name,
-                    SqlQuery.SELECT_USER.getSql(),
-                    connection) == null) {
+                             SqlQuery.SELECT_USER.getSql(),
+                             connection) == null) {
                 result = insertEntity(name,
-                         SqlQuery.INSERT_USER.getSql(),
-                         connection);
+                                      SqlQuery.INSERT_USER.getSql(),
+                                      connection);
             }
         }
         return result;
