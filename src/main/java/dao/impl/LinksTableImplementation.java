@@ -10,11 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LinksTableImplementation extends AbstractTableImplementation {
     private final String USER_ID = "user_id";
     private final String QUESTION_ID = "question_id";
-   // private final String ANSWER_ID = "answer_id";
+    private final String ANSWER_ID = "answer_id";
 
     public int askQuestion(Users user, Questions question) throws SQLException {
         Connection connection = null;
@@ -75,6 +77,37 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return link;
     }
 
+    public List<Link> getAllUserLinks(int userId, Connection connection) throws SQLException {
+        ResultSet resultSet = null;
+        List<Link> links;
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.SELECT_USER_LINK.getSql())) {
+            /* задать действительное значение user id в запросе
+             * исполнить запрос
+             * извлеч значения из result set */
+            statement.setInt(FIRST_ARGUMENT, userId);
+            resultSet = statement.executeQuery();
+            links = new ArrayList<>();
+            while (resultSet.next()){
+                links.add(new Link(resultSet.getInt("id"),
+                                   resultSet.getInt("user_id"),
+                                   resultSet.getInt("question_id"),
+                                   resultSet.getInt("answer_id")));
+            }
+
+            return links.size() > 0 ? links : null;
+
+
+        } finally {
+            JdbcManager.closeResultSet(resultSet);
+        }
+    }
+
+    public void deleteLink(int id, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.DELETE_LINK.getSql())) {
+            statement.setInt(FIRST_ARGUMENT, id);
+            statement.execute();
+        }
+    }
     private int insertLink(Users user, Questions question, Connection connection) throws SQLException {
         int userId = user.getId();
         int questionId = question.getId();

@@ -5,6 +5,7 @@ import dao.entity.Questions;
 import dao.sections.SqlQuery;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class QuestionTableImplementation extends AbstractTableImplementation {
@@ -20,5 +21,12 @@ public class QuestionTableImplementation extends AbstractTableImplementation {
                                   connection);
         }
         return result;
+    }
+
+    public void deleteQuestion(int id, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.DELETE_QUESTION.getSql())) {
+            statement.setInt(FIRST_ARGUMENT, id);
+            statement.execute();
+        }
     }
 }

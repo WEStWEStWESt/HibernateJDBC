@@ -3,6 +3,7 @@ package dao.impl;
 import dao.entity.Answers;
 import dao.sections.SqlQuery;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AnswerTableImplementation extends AbstractTableImplementation {
@@ -18,5 +19,12 @@ public class AnswerTableImplementation extends AbstractTableImplementation {
                      connection);
         }
         return result;
+    }
+
+    public void deleteAnswer(int id, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.DELETE_ANSWER.getSql())) {
+            statement.setInt(FIRST_ARGUMENT, id);
+            statement.execute();
+        }
     }
 }

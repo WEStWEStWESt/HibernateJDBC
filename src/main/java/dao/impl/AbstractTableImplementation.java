@@ -11,6 +11,7 @@ class AbstractTableImplementation {
 
     final int FIRST_ARGUMENT = 1;
     final int SECOND_ARGUMENT = 2;
+    final int THIRD_ARGUMENT = 3;
     final String ID = "id";
     final String NAME = "name";
     final String QUESTION = "question";
