@@ -15,7 +15,7 @@ public class JdbcManager {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres",
-                    "postgres", "WESt1987");
+                                                     "postgres", "WESt1987");
         } catch (SQLException e) {
             System.out.println("*** The connection is not available ***");
         }

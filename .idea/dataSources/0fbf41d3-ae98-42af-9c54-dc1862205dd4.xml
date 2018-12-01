@@ -74,8 +74,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2018-11-25.15:56:01.413</IntrospectionTimestamp>
-      <IntrospectionStateNumber>561</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-12-01.16:24:57.414</IntrospectionTimestamp>
+      <IntrospectionStateNumber>570</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -319,7 +319,12 @@
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="49" parent="28" name="users_pkey">
+    <index id="49" parent="28" name="users_name_uindex">
+      <ObjectId>16440</ObjectId>
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="50" parent="28" name="users_pkey">
       <ObjectId>16394</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
