@@ -184,4 +184,24 @@ public class LinksTableImplementation extends AbstractTableImplementation {
            return statement.executeUpdate();
        }
     }
+
+    public String getStatistics() throws SQLException {
+        ResultSet set = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        try(Connection connection = JdbcManager.connection();
+            PreparedStatement statement = connection.prepareStatement(SqlQuery.VIEW_STATISTICS.getSql())){
+
+            set = statement.executeQuery();
+
+            while (set.next()){
+                stringBuilder.append(set.getString(FIRST_ARGUMENT)).append(" | ")
+                             .append(set.getString(SECOND_ARGUMENT)).append(" | ")
+                             .append(set.getString(THIRD_ARGUMENT)).append('\n');
+
+            }
+        } finally {
+            JdbcManager.closeResultSet(set);
+        }
+        return stringBuilder.toString();
+    }
 }

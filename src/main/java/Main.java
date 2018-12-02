@@ -7,25 +7,32 @@ import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;
 import dao.impl.UserTableImplementation;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-//        JdbcManager.connection();
+         Connection connection = JdbcManager.connection();
 
-//        System.out.println(new UserTableImplementation().addUser(new Users("WESt")));
-//        System.out.println(new UserTableImplementation().getUser("WESt"));
-//        System.out.println(new LinksTableImplementation().askQuestion(
-//                new Users("WESt"),
-//                new Questions("Hi, what`s up?")
-//        ));
-//
-//        System.out.println(new AnswerTableImplementation().addAnswer(
-//                new Answers("ok :-)"), JdbcManager.connection()));
+        /*System.out.println(new UserTableImplementation().addUser(new Users("Lexa")));
+
+        System.out.println(new LinksTableImplementation().askQuestion(
+                new Users("Lexa"),
+                new Questions("Are you imbicil ?")
+        ));
+
+        System.out.println(new AnswerTableImplementation().addAnswer(
+                           new Answers("No, I'm crazy )))"), connection));
+        //new QuestionTableImplementation().removeQuestion("Hi, what`s up?");*/
 
 //        System.out.println(new LinksTableImplementation().
-//                answerQuestion("WESt", "Hi, what`s up?", "go to JPAI"));
+//                answerQuestion("WESt_1", "Hi, what`s up?", "go to JPAI"));
+
+
+        System.out.println(new LinksTableImplementation().getStatistics());
+        //System.out.println(new UserTableImplementation().getUser("WESt"));
+        //new AnswerTableImplementation().deleteAnswer(1, connection);
         //new UserTableImplementation().removeUser("WESt");
-        new QuestionTableImplementation().removeQuestion("Hi, what`s up?");
+
     }
 }

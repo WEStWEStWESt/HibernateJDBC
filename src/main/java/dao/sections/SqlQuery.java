@@ -21,7 +21,11 @@ public enum SqlQuery {
     DELETE_USER("DELETE FROM users WHERE id = ?"),
     DELETE_QUESTION("DELETE FROM questions WHERE id = ?"),
     DELETE_ANSWER("DELETE FROM answers WHERE id = ?"),
-    DELETE_LINK("DELETE FROM links WHERE id = ?");
+    DELETE_LINK("DELETE FROM links WHERE id = ?"),
+    VIEW_STATISTICS("SELECT users.name, questions.question, answers.answer\n" +
+            "FROM users JOIN links ON users.id = links.user_id\n" +
+            "           JOIN questions ON links.question_id = questions.id\n" +
+            "           JOIN answers ON links.answer_id = answers.id");
 
     private final String sql;
 

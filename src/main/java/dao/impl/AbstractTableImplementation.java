@@ -15,6 +15,7 @@ class AbstractTableImplementation {
     final String ID = "id";
     final String NAME = "name";
     final String QUESTION = "question";
+    final String ANSWER = "answer";
 
     int selectEntity(String content, String sql, Connection connection) throws SQLException {
         ResultSet resultSet = null;
