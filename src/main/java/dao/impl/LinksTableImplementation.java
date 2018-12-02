@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.driver.JdbcManager;
+import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Answers;
 import dao.entity.Link;
 import dao.entity.Questions;
@@ -75,7 +76,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         Connection connection = null;
 
         try {
-            connection = JdbcManager.connection();
+            connection = JdbcManagerConnectionPool.getInstance().connection();
             connection.setAutoCommit(false);
 
             int userId;
@@ -107,7 +108,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             assert connection != null;
             connection.rollback();
         } finally {
-            JdbcManager.closeConnection(connection);
+            JdbcManagerConnectionPool.getInstance().closeConnection(connection);
         }
         return result;
     }
@@ -132,7 +133,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             return links.size() > 0 ? links : null;
 
         } finally {
-            JdbcManager.closeResultSet(resultSet);
+            JdbcManagerConnectionPool.getInstance().closeResultSet(resultSet);
         }
     }
 
@@ -155,7 +156,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
                 link = new Link(set.getInt(ID),set.getInt(USER_ID), set.getInt(QUESTION_ID), set.getInt(ANSWER_ID));
             }
         } finally {
-            JdbcManager.closeResultSet(set);
+            JdbcManagerConnectionPool.getInstance().closeResultSet(set);
         }
         return link;
     }
@@ -188,7 +189,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
     public String getStatistics() throws SQLException {
         ResultSet set = null;
         StringBuilder stringBuilder = new StringBuilder();
-        try(Connection connection = JdbcManager.connection();
+        try(Connection connection = JdbcManagerConnectionPool.getInstance().connection();
             PreparedStatement statement = connection.prepareStatement(SqlQuery.VIEW_STATISTICS.getSql())){
 
             set = statement.executeQuery();
@@ -200,7 +201,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
 
             }
         } finally {
-            JdbcManager.closeResultSet(set);
+            JdbcManagerConnectionPool.getInstance().closeResultSet(set);
         }
         return stringBuilder.toString();
     }

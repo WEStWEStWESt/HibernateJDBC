@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.driver.JdbcManager;
+import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Link;
 import dao.entity.Users;
 import dao.sections.SqlQuery;
@@ -14,7 +15,7 @@ public class UserTableImplementation extends AbstractTableImplementation{
     public int addUser(Users users) throws SQLException {
         int result = 0;
         String name;
-        try (Connection connection = JdbcManager.connection()) {
+        try (Connection connection = JdbcManagerConnectionPool.getInstance().connection()) {
             name = users.getName();
             if (selectEntity(name,
                              SqlQuery.SELECT_USER.getSql(),
@@ -28,7 +29,7 @@ public class UserTableImplementation extends AbstractTableImplementation{
     }
 
     public Users getUser(String name) throws SQLException {
-        try (Connection connection = JdbcManager.connection()) {
+        try (Connection connection = JdbcManagerConnectionPool.getInstance().connection()) {
             Users user = null;
             int id;
             if ((id = selectEntity(name, SqlQuery.SELECT_USER.getSql(), connection)) > -1) {

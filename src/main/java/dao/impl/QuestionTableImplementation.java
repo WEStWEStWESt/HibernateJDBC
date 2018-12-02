@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.driver.JdbcManager;
+import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Link;
 import dao.entity.Questions;
 import dao.sections.SqlQuery;
@@ -31,7 +32,7 @@ public class QuestionTableImplementation extends AbstractTableImplementation {
         //QuestionTableImplementation questionHandler = new QuestionTableImplementation();
         LinksTableImplementation linkHandler = new LinksTableImplementation();
         try {
-            connection = JdbcManager.connection();
+            connection = JdbcManagerConnectionPool.getInstance().connection();
             connection.setAutoCommit(false);
 
             int questionId;
@@ -55,7 +56,7 @@ public class QuestionTableImplementation extends AbstractTableImplementation {
             assert connection != null;
             connection.rollback();
         }finally {
-            JdbcManager.closeConnection(connection);
+            JdbcManagerConnectionPool.getInstance().closeConnection(connection);
         }
     }
 
