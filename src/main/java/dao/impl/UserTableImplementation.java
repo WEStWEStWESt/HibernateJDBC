@@ -19,7 +19,7 @@ public class UserTableImplementation extends AbstractTableImplementation{
             name = users.getName();
             if (selectEntity(name,
                              SqlQuery.SELECT_USER.getSql(),
-                             connection) > -1) {
+                             connection) == -1) {
                 result = insertEntity(name,
                                       SqlQuery.INSERT_USER.getSql(),
                                       connection);

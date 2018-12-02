@@ -12,6 +12,10 @@ public enum SqlQuery {
     SELECT_ANSWER("SELECT * FROM answers WHERE answer = ?"),
     SELECT_QUESTION_LINK("SELECT * FROM links WHERE user_id = ? AND question_id = ?"),
     SELECT_USER_LINK("SELECT * FROM links WHERE user_id = ?"),
+    SELECT_ANSWER_LINK("SELECT * FROM links " +
+                       "WHERE user_id = ? " +
+                       "AND question_id = ? " +
+                       "AND answer_id IS NULL"),
 
     DELETE_USER("DELETE FROM users WHERE id = ?"),
     DELETE_QUESTION("DELETE FROM questions WHERE id = ?"),

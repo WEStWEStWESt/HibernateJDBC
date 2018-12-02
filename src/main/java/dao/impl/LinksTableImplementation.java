@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.driver.JdbcManager;
-import dao.entity.Entity;
 import dao.entity.Link;
 import dao.entity.Questions;
 import dao.entity.Users;
@@ -60,6 +59,63 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return result;
     }
 
+    public int answerQuestion(String userName, String questionValue, String answerValue) {
+        /* Открыть соединение
+         * открываем транзакцию
+         * получить идентификатор пользователя
+         * идентификатор вопроса
+         * ищем связь, где есть идентификаторы нужных пользователя и вопроса, и пустое поле с ответом
+         * если связи нет - откат
+         * добавляем ответ в базу, если его нет
+         * модифицируем связь
+         * закрываем транзакцию*/
+        Link link;
+        Connection connection = null;
+
+        try {
+            connection = JdbcManager.connection();
+            connection.setAutoCommit(false);
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<Link> getAllUserLinks(int userId, Connection connection) throws SQLException {
+        ResultSet resultSet = null;
+        List<Link> links;
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.SELECT_USER_LINK.getSql())) {
+            /* задать действительное значение user id в запросе
+             * исполнить запрос
+             * извлеч значения из result set */
+            statement.setInt(FIRST_ARGUMENT, userId);
+            resultSet = statement.executeQuery();
+            links = new ArrayList<>();
+            while (resultSet.next()){
+                links.add(new Link(resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getInt("question_id"),
+                        resultSet.getInt("answer_id")));
+            }
+
+            return links.size() > 0 ? links : null;
+
+
+        } finally {
+            JdbcManager.closeResultSet(resultSet);
+        }
+    }
+
+    public void deleteLink(int id, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.DELETE_LINK.getSql())) {
+            statement.setInt(FIRST_ARGUMENT, id);
+            statement.execute();
+        }
+    }
+
     private Link selectLink(int userId, int questionId, Connection connection) throws SQLException {
         ResultSet set = null;
         Link link = null;
@@ -77,37 +133,6 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return link;
     }
 
-    public List<Link> getAllUserLinks(int userId, Connection connection) throws SQLException {
-        ResultSet resultSet = null;
-        List<Link> links;
-        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.SELECT_USER_LINK.getSql())) {
-            /* задать действительное значение user id в запросе
-             * исполнить запрос
-             * извлеч значения из result set */
-            statement.setInt(FIRST_ARGUMENT, userId);
-            resultSet = statement.executeQuery();
-            links = new ArrayList<>();
-            while (resultSet.next()){
-                links.add(new Link(resultSet.getInt("id"),
-                                   resultSet.getInt("user_id"),
-                                   resultSet.getInt("question_id"),
-                                   resultSet.getInt("answer_id")));
-            }
-
-            return links.size() > 0 ? links : null;
-
-
-        } finally {
-            JdbcManager.closeResultSet(resultSet);
-        }
-    }
-
-    public void deleteLink(int id, Connection connection) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.DELETE_LINK.getSql())) {
-            statement.setInt(FIRST_ARGUMENT, id);
-            statement.execute();
-        }
-    }
     private int insertLink(Users user, Questions question, Connection connection) throws SQLException {
         int userId = user.getId();
         int questionId = question.getId();

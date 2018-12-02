@@ -22,7 +22,7 @@ public class Link extends Entity {
 
     public Link(int id, int userId, int questionId, int answerId) {
         this(userId, questionId);
-        this.id = id;
+        setId(id);
         this.answerId = answerId;
     }
 
