@@ -10,7 +10,8 @@ public enum SqlQuery {
     SELECT_USER("SELECT * FROM users WHERE name = ?"),
     SELECT_QUESTION("SELECT * FROM questions WHERE question = ?"),
     SELECT_ANSWER("SELECT * FROM answers WHERE answer = ?"),
-    SELECT_QUESTION_LINK("SELECT * FROM links WHERE user_id = ? AND question_id = ?"),
+    SELECT_BOUNDED_LINK("SELECT * FROM links WHERE user_id = ? AND question_id = ?"),
+    SELECT_QUESTION_LINK("SELECT * FROM links WHERE question_id = ?"),
     SELECT_USER_LINK("SELECT * FROM links WHERE user_id = ?"),
     SELECT_ANSWER_LINK("SELECT * FROM links " +
                        "WHERE user_id = ? " +

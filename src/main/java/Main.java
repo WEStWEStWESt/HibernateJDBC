@@ -4,6 +4,7 @@ import dao.entity.Questions;
 import dao.entity.Users;
 import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
+import dao.impl.QuestionTableImplementation;
 import dao.impl.UserTableImplementation;
 
 import java.sql.SQLException;
@@ -22,8 +23,9 @@ public class Main {
 //        System.out.println(new AnswerTableImplementation().addAnswer(
 //                new Answers("ok :-)"), JdbcManager.connection()));
 
-        System.out.println(new LinksTableImplementation().
-                answerQuestion("WESt", "Hi, what`s up?", "go to JPAI"));
-        //new UserTableImplementation().deleteUser("WESt");
+//        System.out.println(new LinksTableImplementation().
+//                answerQuestion("WESt", "Hi, what`s up?", "go to JPAI"));
+        //new UserTableImplementation().removeUser("WESt");
+        new QuestionTableImplementation().removeQuestion("Hi, what`s up?");
     }
 }

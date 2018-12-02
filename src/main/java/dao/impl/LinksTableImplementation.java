@@ -112,10 +112,10 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return result;
     }
 
-    public List<Link> getAllUserLinks(int userId, Connection connection) throws SQLException {
+    public List<Link> getAllBoundedLinks(int userId, String sql, Connection connection) throws SQLException {
         ResultSet resultSet = null;
         List<Link> links;
-        try (PreparedStatement statement = connection.prepareStatement(SqlQuery.SELECT_USER_LINK.getSql())) {
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             /* задать действительное значение user id в запросе
              * исполнить запрос
              * извлеч значения из result set */
@@ -130,7 +130,6 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             }
 
             return links.size() > 0 ? links : null;
-
 
         } finally {
             JdbcManager.closeResultSet(resultSet);
@@ -148,7 +147,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         ResultSet set = null;
         Link link = null;
         try (PreparedStatement statement =
-                     connection.prepareStatement(SqlQuery.SELECT_QUESTION_LINK.getSql())){
+                     connection.prepareStatement(SqlQuery.SELECT_BOUNDED_LINK.getSql())){
             statement.setInt(FIRST_ARGUMENT, userId);
             statement.setInt(SECOND_ARGUMENT, questionId);
             set = statement.executeQuery();

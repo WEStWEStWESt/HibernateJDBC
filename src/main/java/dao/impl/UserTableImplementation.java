@@ -6,7 +6,6 @@ import dao.entity.Users;
 import dao.sections.SqlQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -39,13 +38,13 @@ public class UserTableImplementation extends AbstractTableImplementation{
         }
     }
 
-    public void deleteUser(String name) throws SQLException {
+    public void removeUser(String name) throws SQLException {
         Connection connection = null;
         QuestionTableImplementation questionHandler = new QuestionTableImplementation();
         AnswerTableImplementation answerHandler = new AnswerTableImplementation();
         LinksTableImplementation linkHandler = new LinksTableImplementation();
         try {
-            connection= JdbcManager.connection();
+            connection = JdbcManager.connection();
             connection.setAutoCommit(false);
 
             int userId;
@@ -54,7 +53,7 @@ public class UserTableImplementation extends AbstractTableImplementation{
             }
 
             List<Link> links;
-            if ((links = linkHandler.getAllUserLinks(userId, connection)) != null) {
+            if ((links = linkHandler.getAllBoundedLinks(userId, SqlQuery.SELECT_USER_LINK.getSql(), connection)) != null) {
                 for (Link link: links) {
                     int questionID = link.getQuestionId();
                     int answerID = link.getAnswerId();
@@ -68,7 +67,6 @@ public class UserTableImplementation extends AbstractTableImplementation{
                 }
             }
             deleteUser(userId, connection);
-
             connection.commit();
         } catch (Exception e){
             assert connection != null;
