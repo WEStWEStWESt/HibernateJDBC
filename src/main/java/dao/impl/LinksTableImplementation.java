@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.driver.JdbcManager;
+import dao.entity.Answers;
 import dao.entity.Link;
 import dao.entity.Questions;
 import dao.entity.Users;
@@ -59,7 +60,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return result;
     }
 
-    public int answerQuestion(String userName, String questionValue, String answerValue) {
+    public int answerQuestion(String userName, String questionValue, String answerValue) throws SQLException {
         /* Открыть соединение
          * открываем транзакцию
          * получить идентификатор пользователя
@@ -70,18 +71,45 @@ public class LinksTableImplementation extends AbstractTableImplementation {
          * модифицируем связь
          * закрываем транзакцию*/
         Link link;
+        int result = 0;
         Connection connection = null;
 
         try {
             connection = JdbcManager.connection();
             connection.setAutoCommit(false);
 
+            int userId;
+            int questionId;
+            int answerId;
 
+            if ((userId = selectEntity(userName, SqlQuery.SELECT_USER.getSql(), connection)) == -1) {
+                throw new SQLException("*** Unknown user ***");
+            }
+
+            if ((questionId = selectEntity(questionValue, SqlQuery.SELECT_QUESTION.getSql(), connection)) == -1) {
+                throw new SQLException("*** Unknown question ***");
+            }
+
+            if ((link = selectLink(userId, questionId, connection)) == null) {
+                throw new SQLException("*** The question is not asked");
+            }
+
+            Answers answer = new Answers(answerValue);
+            new AnswerTableImplementation().addAnswer(answer, connection);
+
+            answerId = selectEntity(answerValue, SqlQuery.SELECT_ANSWER.getSql(), connection);
+
+            result += updateLink(answerId, link.getId(), connection);
+
+            connection.commit();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            assert connection != null;
+            connection.rollback();
+        } finally {
+            JdbcManager.closeConnection(connection);
         }
-
+        return result;
     }
 
     public List<Link> getAllUserLinks(int userId, Connection connection) throws SQLException {
@@ -125,7 +153,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             statement.setInt(SECOND_ARGUMENT, questionId);
             set = statement.executeQuery();
             if (set.next()) {
-                link = new Link(set.getInt(USER_ID), set.getInt(QUESTION_ID));
+                link = new Link(set.getInt(ID),set.getInt(USER_ID), set.getInt(QUESTION_ID), set.getInt(ANSWER_ID));
             }
         } finally {
             JdbcManager.closeResultSet(set);
@@ -146,5 +174,15 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             }
         }
         return result;
+    }
+
+    private int updateLink(int answer_id, int id, Connection connection) throws SQLException {
+       try (PreparedStatement statement =
+                    connection.prepareStatement(SqlQuery.UPDATE_LINK.getSql())) {
+           statement.setInt(FIRST_ARGUMENT, answer_id);
+           statement.setInt(SECOND_ARGUMENT, id);
+
+           return statement.executeUpdate();
+       }
     }
 }

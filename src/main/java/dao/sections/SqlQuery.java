@@ -16,7 +16,7 @@ public enum SqlQuery {
                        "WHERE user_id = ? " +
                        "AND question_id = ? " +
                        "AND answer_id IS NULL"),
-
+    UPDATE_LINK("UPDATE links SET answer_id = ? WHERE id = ?"),
     DELETE_USER("DELETE FROM users WHERE id = ?"),
     DELETE_QUESTION("DELETE FROM questions WHERE id = ?"),
     DELETE_ANSWER("DELETE FROM answers WHERE id = ?"),
