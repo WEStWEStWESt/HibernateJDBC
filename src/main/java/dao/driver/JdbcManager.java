@@ -1,7 +1,7 @@
 package dao.driver;
 
 import java.sql.*;
-
+/*
 public class JdbcManager {
     static {
         try {
@@ -32,7 +32,7 @@ public class JdbcManager {
         }
     }
 
-    /* при работе с транзакциями рекоменд.закрывать resultSet & statement !!!*/
+    при работе с транзакциями рекоменд.закрывать resultSet & statement !!!
     public static void closeStatement(Statement statement){
         if( statement != null){
             try {
@@ -52,4 +52,6 @@ public class JdbcManager {
             }
         }
     }
+
 }
+        */

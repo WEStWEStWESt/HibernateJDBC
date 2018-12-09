@@ -1,6 +1,5 @@
 package dao.impl;
 
-import dao.driver.JdbcManager;
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Link;
 import dao.entity.Questions;

@@ -15,7 +15,7 @@ public class JdbcManagerConnectionPool {
             dataSource.setDriverClass("org.postgresql.Driver");
             dataSource.setJdbcUrl("jdbc:postgresql://localhost:5433/postgres");
             dataSource.setUser("postgres");
-            dataSource.setPassword("WESt1987");
+            dataSource.setPassword("WESt14441987");
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }

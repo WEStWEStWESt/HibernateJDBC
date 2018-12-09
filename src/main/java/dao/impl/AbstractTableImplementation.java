@@ -1,6 +1,6 @@
 package dao.impl;
 
-import dao.driver.JdbcManager;
+import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Entity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ class AbstractTableImplementation {
                 result = resultSet.getInt(ID);
             }
         } finally {
-            JdbcManager.closeResultSet(resultSet);
+            JdbcManagerConnectionPool.getInstance().closeResultSet(resultSet);
         }
         return result;
     }

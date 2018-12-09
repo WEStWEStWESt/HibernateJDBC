@@ -1,6 +1,5 @@
 package dao.impl;
 
-import dao.driver.JdbcManager;
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Answers;
 import dao.entity.Link;
@@ -28,7 +27,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             String userName = user.getName();
             String content = question.getQuestion();
 
-            connection = JdbcManager.connection();
+            connection = JdbcManagerConnectionPool.getInstance().connection();
             connection.setAutoCommit(false);
 
             if ((userId = selectEntity(userName,
@@ -56,7 +55,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
             assert connection != null;
             connection.rollback();
         } finally {
-            JdbcManager.closeConnection(connection);
+            JdbcManagerConnectionPool.getInstance().closeConnection(connection);
         }
         return result;
     }
