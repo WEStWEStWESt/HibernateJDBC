@@ -1,28 +1,51 @@
 package dao.entity;
 
-public class Users extends Entity{
+import javax.persistence.*;
+import javax.persistence.Entity;
+
+@Entity
+@Table(name = "users")
+public class Users {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen")
+    @SequenceGenerator(name = "seq_gen", sequenceName = "users_seq", allocationSize = 1)
+    private int id;
+
+    @Column(name = "name")
+    private String name;
 
     public Users() {
     }
 
     public Users(String name) {
-        super(name);
+        this.name = name;
     }
 
     public Users(int id, String name) {
-        super(id, name);
+        this.id = id;
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
-        return getContent();
+        return name;
     }
 
     public void setName(String name) {
-        setContent(name);
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return getContent();
+        return name;
     }
 }

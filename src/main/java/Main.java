@@ -6,7 +6,6 @@ import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;
 import dao.impl.UserTableImplementation;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 

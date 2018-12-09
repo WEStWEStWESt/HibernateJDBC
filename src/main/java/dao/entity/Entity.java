@@ -1,6 +1,7 @@
 package dao.entity;
 
 public class Entity {
+
     private int id;
     private String content;
 
@@ -15,7 +16,6 @@ public class Entity {
         this(name);
         this.id = id;
     }
-
 
     public int getId() {
         return id;
