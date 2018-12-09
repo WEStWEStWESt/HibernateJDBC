@@ -1,6 +1,6 @@
 package dao.entity;
-
-public class Answers extends Entity{
+/*
+public class Answers {
 
     public Answers() {
     }
@@ -25,4 +25,4 @@ public class Answers extends Entity{
     public String toString() {
         return getContent();
     }
-}
+}*/

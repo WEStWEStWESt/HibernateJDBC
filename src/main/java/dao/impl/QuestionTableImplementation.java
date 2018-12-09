@@ -1,5 +1,5 @@
 package dao.impl;
-
+/*
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Link;
 import dao.entity.Questions;
@@ -65,4 +65,4 @@ public class QuestionTableImplementation extends AbstractTableImplementation {
             statement.execute();
         }
     }
-}
+}*/

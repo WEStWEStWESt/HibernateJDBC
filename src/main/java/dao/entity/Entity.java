@@ -1,6 +1,7 @@
 package dao.entity;
 
 public class Entity {
+/*
 
     private int id;
     private String content;
@@ -32,4 +33,5 @@ public class Entity {
     void setContent(String content) {
         this.content = content;
     }
+*/
 }

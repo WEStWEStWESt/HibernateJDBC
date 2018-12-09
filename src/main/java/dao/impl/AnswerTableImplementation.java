@@ -1,5 +1,5 @@
 package dao.impl;
-
+/*
 import dao.entity.Answers;
 import dao.sections.SqlQuery;
 import java.sql.Connection;
@@ -28,3 +28,4 @@ public class AnswerTableImplementation extends AbstractTableImplementation {
         }
     }
 }
+*/

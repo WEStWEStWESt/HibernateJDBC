@@ -1,5 +1,5 @@
 package dao.impl;
-
+/*
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Link;
 import dao.entity.Users;
@@ -83,3 +83,4 @@ public class UserTableImplementation extends AbstractTableImplementation{
         }
     }
 }
+*/

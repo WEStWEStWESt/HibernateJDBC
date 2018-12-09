@@ -1,5 +1,5 @@
 package dao.entity;
-
+/*
 public class Link extends Entity {
     private int id;
     private int userId;
@@ -7,7 +7,6 @@ public class Link extends Entity {
     private int answerId;
 
     public Link() {
-
     }
 
     public Link(int userId, int questionId) {
@@ -50,3 +49,4 @@ public class Link extends Entity {
         this.answerId = answerId;
     }
 }
+*/

@@ -14,6 +14,7 @@ public class HibernateFactoryManager {
     private HibernateFactoryManager() {
         Configuration configuration = new Configuration().configure();
         configuration.addAnnotatedClass(Users.class);
+
         StandardServiceRegistryBuilder builder =
                 new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         factory = configuration.buildSessionFactory(builder.build());
@@ -28,5 +29,12 @@ public class HibernateFactoryManager {
         return instance;
     }
 
+    public SessionFactory getFactory(){
+        return factory;
+    }
 
+    /*create sequence quest_seq START 1;
+  ALTER TABLE questions ALTER COLUMN id
+      SET DEFAULT nextval('quest_seq');
+ALTER SEQUENCE quest_seq OWNED BY questions.id;*/
 }

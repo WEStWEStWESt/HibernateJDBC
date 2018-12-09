@@ -1,3 +1,4 @@
+/*import dao.driver.HibernateFactoryManager;
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Answers;
 import dao.entity.Questions;
@@ -5,13 +6,16 @@ import dao.entity.Users;
 import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;
-import dao.impl.UserTableImplementation;
+import dao.impl.UserTableImplementation;*/
+import dao.impl.implHibernate.UserHibernateTable;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
- /*        Connection connection = JdbcManagerConnectionPool.getInstance().connection();
+
+ /*      Connection connection = JdbcManagerConnectionPool.getInstance().connection();
 
         System.out.println(new UserTableImplementation().addUser(new Users("ZMEY")));
 
@@ -28,7 +32,8 @@ public class Main {
                answerQuestion("ZMEY", "???", "!!!"));
 */
 
-        System.out.println(new LinksTableImplementation().getStatistics());
+        System.out.println(new UserHibernateTable().getUser(7));
+        //System.out.println(new LinksTableImplementation().getStatistics());
         //System.out.println(new UserTableImplementation().getUser("WESt"));
         //new AnswerTableImplementation().deleteAnswer(1, connection);
         //new UserTableImplementation().removeUser("WESt");

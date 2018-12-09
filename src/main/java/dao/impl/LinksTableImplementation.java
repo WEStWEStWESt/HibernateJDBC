@@ -1,5 +1,5 @@
 package dao.impl;
-
+/*
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Answers;
 import dao.entity.Link;
@@ -61,15 +61,15 @@ public class LinksTableImplementation extends AbstractTableImplementation {
     }
 
     public int answerQuestion(String userName, String questionValue, String answerValue) throws SQLException {
-        /* Открыть соединение
-         * открываем транзакцию
-         * получить идентификатор пользователя
-         * идентификатор вопроса
-         * ищем связь, где есть идентификаторы нужных пользователя и вопроса, и пустое поле с ответом
-         * если связи нет - откат
-         * добавляем ответ в базу, если его нет
-         * модифицируем связь
-         * закрываем транзакцию*/
+//         Открыть соединение
+//         * открываем транзакцию
+//         * получить идентификатор пользователя
+//         * идентификатор вопроса
+//         * ищем связь, где есть идентификаторы нужных пользователя и вопроса, и пустое поле с ответом
+//         * если связи нет - откат
+//         * добавляем ответ в базу, если его нет
+//         * модифицируем связь
+//         * закрываем транзакцию
         Link link;
         int result = 0;
         Connection connection = null;
@@ -116,9 +116,9 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         ResultSet resultSet = null;
         List<Link> links;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            /* задать действительное значение user id в запросе
-             * исполнить запрос
-             * извлеч значения из result set */
+            // задать действительное значение user id в запросе
+             // исполнить запрос
+             // извлеч значения из result set
             statement.setInt(FIRST_ARGUMENT, userId);
             resultSet = statement.executeQuery();
             links = new ArrayList<>();
@@ -204,4 +204,5 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         }
         return stringBuilder.toString();
     }
-}
+
+} */

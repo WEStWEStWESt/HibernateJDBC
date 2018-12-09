@@ -1,5 +1,5 @@
 package dao.impl;
-
+/*
 import dao.driver.JdbcManagerConnectionPool;
 import dao.entity.Entity;
 import java.sql.Connection;
@@ -41,3 +41,4 @@ class AbstractTableImplementation {
     }
 
 }
+*/
