@@ -74,8 +74,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2018-12-09.16:54:52.790</IntrospectionTimestamp>
-      <IntrospectionStateNumber>607</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-12-09.21:01:39.282</IntrospectionTimestamp>
+      <IntrospectionStateNumber>666</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -121,19 +121,19 @@
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
-    <sequence id="21" parent="14" name="quest_seq">
-      <ObjectId>16444</ObjectId>
+    <sequence id="21" parent="14" name="users_id_seq">
+      <ObjectId>16482</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>608</StateNumber>
+      <StateNumber>667</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
     <sequence id="22" parent="14" name="users_seq">
-      <ObjectId>16441</ObjectId>
+      <ObjectId>16474</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>603</StateNumber>
+      <StateNumber>661</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
@@ -156,19 +156,19 @@
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="25" parent="14" name="questions_id_seq">
+    <sequence id="25" parent="14" name="quest_seq">
+      <ObjectId>16444</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>608</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="26" parent="14" name="questions_id_seq">
       <ObjectId>16395</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>556</StateNumber>
-      <SequenceIdentity>1..2147483647</SequenceIdentity>
-      <BelongsToColumn>1</BelongsToColumn>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <sequence id="26" parent="14" name="users_id_seq">
-      <ObjectId>16384</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>555</StateNumber>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <BelongsToColumn>1</BelongsToColumn>
       <CacheSize>1</CacheSize>
@@ -190,9 +190,9 @@
       <StateNumber>560</StateNumber>
     </table>
     <table id="30" parent="14" name="users">
-      <ObjectId>16386</ObjectId>
+      <ObjectId>16476</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>559</StateNumber>
+      <StateNumber>662</StateNumber>
     </table>
     <column id="31" parent="27" name="id">
       <Position>1</Position>
@@ -261,16 +261,7 @@
       <UnderlyingIndexName>links_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="41" parent="28" name="links_users_id_fk">
-      <ObjectId>16425</ObjectId>
-      <ColNames>user_id</ColNames>
-      <RefTableId>16386</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>users</RefTableName>
-      <RefKeyName>users_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="42" parent="28" name="links_questions_id_fk">
+    <foreign-key id="41" parent="28" name="links_questions_id_fk">
       <ObjectId>16430</ObjectId>
       <ColNames>question_id</ColNames>
       <RefTableId>16397</RefTableId>
@@ -279,7 +270,7 @@
       <RefKeyName>questions_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="43" parent="28" name="links_answers_id_fk">
+    <foreign-key id="42" parent="28" name="links_answers_id_fk">
       <ObjectId>16435</ObjectId>
       <ColNames>answer_id</ColNames>
       <RefTableId>16408</RefTableId>
@@ -288,7 +279,7 @@
       <RefKeyName>answers_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="44" parent="29" name="id">
+    <column id="43" parent="29" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -297,52 +288,46 @@
       <TypeId>23</TypeId>
       <SequenceName>quest_seq</SequenceName>
     </column>
-    <column id="45" parent="29" name="question">
+    <column id="44" parent="29" name="question">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>556</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="46" parent="29" name="questions_pkey">
+    <index id="45" parent="29" name="questions_pkey">
       <ObjectId>16404</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="47" parent="29" name="questions_pkey">
+    <key id="46" parent="29" name="questions_pkey">
       <ObjectId>16405</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>questions_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="48" parent="30" name="id">
+    <column id="47" parent="30" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>605</StateNumber>
-      <DefaultExpression>nextval(&apos;users_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>666</StateNumber>
+      <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
       <SequenceName>users_id_seq</SequenceName>
     </column>
-    <column id="49" parent="30" name="name">
+    <column id="48" parent="30" name="name">
       <Position>2</Position>
-      <DataType>varchar|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>555</StateNumber>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>662</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="50" parent="30" name="users_pkey">
-      <ObjectId>16393</ObjectId>
+    <index id="49" parent="30" name="users_pkey">
+      <ObjectId>16479</ObjectId>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="51" parent="30" name="users_name_uindex">
-      <ObjectId>16440</ObjectId>
-      <ColNames>name</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="52" parent="30" name="users_pkey">
-      <ObjectId>16394</ObjectId>
+    <key id="50" parent="30" name="users_pkey">
+      <ObjectId>16480</ObjectId>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
