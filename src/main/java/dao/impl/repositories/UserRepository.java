@@ -6,13 +6,13 @@ import dao.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UserRepository {
+public class UserRepository extends AbstractRepository{
 
     public Users getUser(String name){
         String screen = "%";
         Session session = getSession();
         Users user = (Users) session.createQuery(HqlQuery.SELECT_USER_BY_NAME.getHql())
-                                    .setParameter("name", name)
+                                    .setParameter("name", screen + name + screen)
                                     .uniqueResult();
         session.close();
         return user;
@@ -37,11 +37,5 @@ public class UserRepository {
             transaction.commit();
             session.close();
         }
-    }
-
-    private Session getSession(){
-       return HibernateFactoryManager.getInstance()
-                                     .getFactory()
-                                     .openSession();
     }
 }

@@ -2,7 +2,7 @@ package dao.sections;
 
 public enum  HqlQuery {
 
-    SELECT_USER_BY_NAME("FROM Users WHERE name = :name");
+    SELECT_USER_BY_NAME("FROM Users WHERE name LIKE :name");
 
     private String hql;
 
