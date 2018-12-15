@@ -1,4 +1,4 @@
-package dao.impl.repositories;
+package dao.repositories;
 
 import dao.driver.HibernateFactoryManager;
 import org.hibernate.Session;

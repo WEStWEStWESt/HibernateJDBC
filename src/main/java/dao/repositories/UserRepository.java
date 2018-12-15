@@ -1,13 +1,14 @@
-package dao.impl.repositories;
+package dao.repositories;
 
-import dao.driver.HibernateFactoryManager;
 import dao.entity.Users;
+import dao.repositories.interfaces.IUserRepository;
 import dao.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UserRepository extends AbstractRepository{
+public class UserRepository extends AbstractRepository implements IUserRepository {
 
+    @Override
     public Users getUser(String name){
         String screen = "%";
         Session session = getSession();
@@ -18,6 +19,7 @@ public class UserRepository extends AbstractRepository{
         return user;
     }
 
+    @Override
     public void addUser(String name){
         if (getUser(name) == null) {
             Session session = getSession();
@@ -28,6 +30,7 @@ public class UserRepository extends AbstractRepository{
         }
     }
 
+    @Override
     public void removeUser(String name){
         Users user;
         if ((user = getUser(name)) != null){

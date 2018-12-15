@@ -1,7 +1,8 @@
 package dao.impl.implHibernate;
 
 import dao.entity.Users;
-import dao.impl.repositories.UserRepository;
+import dao.repositories.UserRepository;
+import dao.repositories.interfaces.IUserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
 public class UserRepositoryTest {
 
     private static final String TEST_NAME = "test";
-    private UserRepository dao;
+    private IUserRepository dao;
 
     @Before
     public void setUp() {
