@@ -31,7 +31,7 @@ public class Main {
                answerQuestion("ZMEY", "???", "!!!"));
 */
 
-        System.out.println(new UserRepository().getUser(7));
+
         //System.out.println(new LinksTableImplementation().getStatistics());
         //System.out.println(new UserTableImplementation().getUser("WESt"));
         //new AnswerTableImplementation().deleteAnswer(1, connection);

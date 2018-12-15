@@ -1,11 +1,14 @@
 package dao.impl.implHibernate;
 
+import dao.entity.Users;
 import dao.impl.repositories.UserRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class UserRepositoryTest {
@@ -14,25 +17,32 @@ public class UserRepositoryTest {
     private UserRepository dao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dao = new UserRepository();
-    }
-
-    @Test
-    public void getUser() {
-       final int TEST_ID = 2;
-       String EXPECTED_NAME = "WESt";
-       String ACTUAL_NAME = dao.getUser(TEST_ID).getName();
-       assertThat(ACTUAL_NAME, is(equalTo(EXPECTED_NAME)));
-
-    }
-
-    @Test
-    public void CheckOfAddingUser(){
-        String EXPECTED_NAME = TEST_NAME;
         dao.addUser(TEST_NAME);
+    }
+
+    @Test
+    public void checkOfGettingUserByName() {
+       String ACTUAL_NAME = dao.getUser(TEST_NAME).getName();
+       assertThat(ACTUAL_NAME, is(equalTo(TEST_NAME)));
+    }
+
+    @Test
+    public void checkOfAddingUserByName(){
         String ACTUAL_NAME = dao.getUser(TEST_NAME).getName();
-        assertThat(ACTUAL_NAME, is(equalTo(EXPECTED_NAME)));
+        assertThat(ACTUAL_NAME, is(equalTo(TEST_NAME)));
+    }
+
+    @Test
+    public void checkOfRemovingUserByName(){
+        dao.removeUser(TEST_NAME);
+        final Users USER = dao.getUser(TEST_NAME);
+        assertThat(USER, is(nullValue(Users.class)));
+    }
+
+    @After
+    public void tearDown() {
         dao.removeUser(TEST_NAME);
     }
 }

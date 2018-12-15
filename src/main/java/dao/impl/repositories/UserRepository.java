@@ -8,10 +8,6 @@ import org.hibernate.Transaction;
 
 public class UserRepository {
 
-    public Users getUser(int id){
-        return getSession().get(Users.class,id);
-    }
-
     public Users getUser(String name){
         String screen = "%";
         Session session = getSession();
