@@ -2,6 +2,7 @@ package dao.entity;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +16,12 @@ public class Users {
 
     @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
+
+    @OneToMany(targetEntity = Link.class,
+               mappedBy = "user",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
+    private List<Link> links;
 
     public Users() {
     }
@@ -42,6 +49,10 @@ public class Users {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Link> getLinks() {
+        return links;
     }
 
     @Override
