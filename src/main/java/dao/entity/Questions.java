@@ -13,10 +13,13 @@ public class Questions {
     @SequenceGenerator(name = "quest_seq", sequenceName = "quest_seq", allocationSize = 1)
     private int id;
 
-    @Column(name = "question")
+    @Column(name = "question", unique = true, nullable = false, length = 50)
     private String question;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Link.class,
+               mappedBy = "question",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
     private List<Link> links;
 
     public Questions() {

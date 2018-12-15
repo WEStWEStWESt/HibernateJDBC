@@ -12,15 +12,15 @@ public class Link {
     @SequenceGenerator(name = "gen_seq", sequenceName = "links_seq", allocationSize = 1)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Questions.class)
     @JoinColumn(name = "question_id", nullable = false)
     private Questions question;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Answers.class)
     @JoinColumn(name = "answer_id")
     private Answers answer;
 
