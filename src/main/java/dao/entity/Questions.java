@@ -2,13 +2,13 @@ package dao.entity;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
 public class Questions {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quest_seq")
     @SequenceGenerator(name = "quest_seq", sequenceName = "quest_seq", allocationSize = 1)
     private int id;
@@ -16,15 +16,13 @@ public class Questions {
     @Column(name = "question")
     private String question;
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Link> links;
+
     public Questions() {
     }
 
     public Questions(String question) {
-        this.question = question;
-    }
-
-    public Questions(int id, String question) {
-        this.id = id;
         this.question = question;
     }
 
@@ -42,6 +40,10 @@ public class Questions {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public List<Link> getLinks() {
+        return links;
     }
 
     @Override

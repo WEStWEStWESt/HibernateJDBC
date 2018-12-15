@@ -1,52 +1,80 @@
 package dao.entity;
-/*
-public class Link extends Entity {
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+
+@Entity
+@Table(name = "links")
+public class Link {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq")
+    @SequenceGenerator(name = "gen_seq", sequenceName = "links_seq", allocationSize = 1)
     private int id;
-    private int userId;
-    private int questionId;
-    private int answerId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Questions question;
+
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answers answer;
 
     public Link() {
     }
 
-    public Link(int userId, int questionId) {
-        this.userId = userId;
-        this.questionId = questionId;
+    public Link(Users user, Questions question) {
+        this.user = user;
+        this.question = question;
     }
 
-    public Link(int userId, int questionId, int answerId) {
-        this(userId, questionId);
-        this.answerId = answerId;
+    public Link(Users user, Questions question, Answers answer) {
+        this.user = user;
+        this.question = question;
+        this.answer = answer;
     }
 
-    public Link(int id, int userId, int questionId, int answerId) {
-        this(userId, questionId);
-        setId(id);
-        this.answerId = answerId;
+    public int getId() {
+        return id;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public Users getUser() {
+        return user;
     }
 
-    public int getQuestionId() {
-        return questionId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
+    public Questions getQuestion() {
+        return question;
     }
 
-    public int getAnswerId() {
-        return answerId;
+    public void setQuestion(Questions question) {
+        this.question = question;
     }
 
-    public void setAnswerId(int answerId) {
-        this.answerId = answerId;
+    public Answers getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answers answer) {
+        this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return    user.getName() + " | "
+                + question.getQuestion() + " | "
+                + (answer != null ? answer.getAnswer()
+                                  : "has no answer yet.");
     }
 }
-*/
