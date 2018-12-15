@@ -9,10 +9,11 @@ public class Users {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq")
+    @SequenceGenerator(name = "gen_seq", sequenceName = "user_seq", allocationSize = 1)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
 
     public Users() {

@@ -25,7 +25,9 @@ public class UserHibernateTable {
     public void addUser(String name){
         if (getUser(name) == null) {
             Session session = getSession();
+            Transaction transaction = session.beginTransaction();
             session.save(new Users(name));
+            transaction.commit();
             session.close();
         }
     }

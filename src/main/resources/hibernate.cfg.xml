@@ -18,7 +18,7 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
-       <!-- <property name="hbm2ddl.auto">create</property>
+     <!--   <property name="hbm2ddl.auto">update</property>
         <property name="javax.persistence.schema-generation.database.action">create</property>-->
 
     </session-factory>
