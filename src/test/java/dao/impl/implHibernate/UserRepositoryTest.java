@@ -1,5 +1,6 @@
 package dao.impl.implHibernate;
 
+import dao.impl.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,14 +8,14 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 
-public class UserHibernateTableTest {
+public class UserRepositoryTest {
 
     private static final String TEST_NAME = "test";
-    private UserHibernateTable dao;
+    private UserRepository dao;
 
     @Before
     public void setUp() throws Exception {
-        dao = new UserHibernateTable();
+        dao = new UserRepository();
     }
 
     @Test

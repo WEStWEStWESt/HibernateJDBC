@@ -1,4 +1,4 @@
-package dao.impl.implHibernate;
+package dao.impl.repositories;
 
 import dao.driver.HibernateFactoryManager;
 import dao.entity.Users;
@@ -6,7 +6,7 @@ import dao.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UserHibernateTable {
+public class UserRepository {
 
     public Users getUser(int id){
         return getSession().get(Users.class,id);

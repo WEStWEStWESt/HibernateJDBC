@@ -7,9 +7,8 @@ import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;
 import dao.impl.UserTableImplementation;*/
-import dao.impl.implHibernate.UserHibernateTable;
+import dao.impl.repositories.UserRepository;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
@@ -32,7 +31,7 @@ public class Main {
                answerQuestion("ZMEY", "???", "!!!"));
 */
 
-        System.out.println(new UserHibernateTable().getUser(7));
+        System.out.println(new UserRepository().getUser(7));
         //System.out.println(new LinksTableImplementation().getStatistics());
         //System.out.println(new UserTableImplementation().getUser("WESt"));
         //new AnswerTableImplementation().deleteAnswer(1, connection);
