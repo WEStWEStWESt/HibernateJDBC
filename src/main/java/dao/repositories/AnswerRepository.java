@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import dao.entity.Answers;
+import beans.entities.hibernate.Answers;
 import dao.repositories.interfaces.IAnswerRepository;
 
 public class AnswerRepository extends AbstractRepository implements IAnswerRepository {

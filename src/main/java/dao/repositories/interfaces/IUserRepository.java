@@ -1,6 +1,6 @@
 package dao.repositories.interfaces;
 
-import dao.entity.Users;
+import beans.entities.hibernate.Users;
 
 public interface IUserRepository {
     Users getUser(String name);

@@ -1,7 +1,6 @@
 package dao.repositories;
 
-import dao.entity.Users;
-import dao.repositories.UserRepository;
+import beans.entities.hibernate.Users;
 import dao.repositories.interfaces.IUserRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +8,6 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class UserRepositoryTest {

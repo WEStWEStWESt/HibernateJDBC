@@ -1,8 +1,8 @@
 /*import dao.driver.HibernateFactoryManager;
 import dao.driver.JdbcManagerConnectionPool;
-import dao.entity.Answers;
-import dao.entity.Questions;
-import dao.entity.Users;
+import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Users;
 import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;

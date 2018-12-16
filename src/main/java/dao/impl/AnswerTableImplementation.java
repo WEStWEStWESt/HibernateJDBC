@@ -1,7 +1,7 @@
 package dao.impl;
 /*
-import dao.entity.Answers;
-import dao.sections.SqlQuery;
+import beans.entities.hibernate.Answers;
+import utils.sections.SqlQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

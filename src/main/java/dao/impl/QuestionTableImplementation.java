@@ -1,9 +1,9 @@
 package dao.impl;
 /*
 import dao.driver.JdbcManagerConnectionPool;
-import dao.entity.Link;
-import dao.entity.Questions;
-import dao.sections.SqlQuery;
+import beans.entities.hibernate.Link;
+import beans.entities.hibernate.Questions;
+import utils.sections.SqlQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

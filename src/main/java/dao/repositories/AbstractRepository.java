@@ -1,7 +1,6 @@
 package dao.repositories;
 
 import dao.driver.HibernateFactoryManager;
-import dao.entity.Questions;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

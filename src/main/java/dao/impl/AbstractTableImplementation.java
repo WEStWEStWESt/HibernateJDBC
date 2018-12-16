@@ -1,7 +1,7 @@
 package dao.impl;
 /*
 import dao.driver.JdbcManagerConnectionPool;
-import dao.entity.AbstractEntity;
+import beans.entities.AbstractEntity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

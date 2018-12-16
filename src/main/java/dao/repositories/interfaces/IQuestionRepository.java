@@ -1,7 +1,7 @@
 package dao.repositories.interfaces;
 
 
-import dao.entity.Questions;
+import beans.entities.hibernate.Questions;
 
 public interface IQuestionRepository {
     Questions getQuestion(String question);

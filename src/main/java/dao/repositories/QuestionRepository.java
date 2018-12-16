@@ -1,8 +1,8 @@
 package dao.repositories;
 
-import dao.entity.Questions;
+import beans.entities.hibernate.Questions;
 import dao.repositories.interfaces.IQuestionRepository;
-import dao.sections.HqlQuery;
+import utils.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

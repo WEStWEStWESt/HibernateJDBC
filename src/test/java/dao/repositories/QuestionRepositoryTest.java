@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import dao.entity.Questions;
+import beans.entities.hibernate.Questions;
 import dao.repositories.interfaces.IQuestionRepository;
 import org.junit.After;
 import org.junit.Before;

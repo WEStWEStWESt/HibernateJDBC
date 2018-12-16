@@ -1,8 +1,8 @@
 package dao.repositories;
 
-import dao.entity.Users;
+import beans.entities.hibernate.Users;
 import dao.repositories.interfaces.IUserRepository;
-import dao.sections.HqlQuery;
+import utils.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 

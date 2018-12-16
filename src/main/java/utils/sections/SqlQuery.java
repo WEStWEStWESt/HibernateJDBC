@@ -1,4 +1,4 @@
-package dao.sections;
+package utils.sections;
 
 public enum SqlQuery {
 

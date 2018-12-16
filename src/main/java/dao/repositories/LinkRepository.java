@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import dao.entity.Link;
+import beans.entities.hibernate.Link;
 import dao.repositories.interfaces.ILinkRepository;
 
 public class LinkRepository extends AbstractRepository implements ILinkRepository {

@@ -1,9 +1,9 @@
 package dao.driver;
 
-import dao.entity.Answers;
-import dao.entity.Link;
-import dao.entity.Questions;
-import dao.entity.Users;
+import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Link;
+import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Users;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

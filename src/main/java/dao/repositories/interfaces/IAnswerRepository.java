@@ -1,6 +1,6 @@
 package dao.repositories.interfaces;
 
-import dao.entity.Answers;
+import beans.entities.hibernate.Answers;
 
 public interface IAnswerRepository {
     Answers getAnswer(String answer);

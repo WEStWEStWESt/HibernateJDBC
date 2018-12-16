@@ -1,8 +1,8 @@
-package dao.entity.factory;
+package beans.entities.hibernate.factory;
 
-import dao.entity.Answers;
-import dao.entity.Questions;
-import dao.entity.Users;
+import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Users;
 
 public class EntityFactory {
 

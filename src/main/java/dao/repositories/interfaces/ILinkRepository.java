@@ -1,6 +1,6 @@
 package dao.repositories.interfaces;
 
-import dao.entity.Link;
+import beans.entities.hibernate.Link;
 
 public interface ILinkRepository {
     Link getLink(String link);
