@@ -1,4 +1,4 @@
-package dao.impl.implHibernate;
+package dao.repositories;
 
 import dao.entity.Users;
 import dao.repositories.UserRepository;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class UserRepositoryTest {
 
-    private static final String TEST_NAME = "test";
+    private static String TEST_NAME = "test_name";
     private IUserRepository dao;
 
     @Before
@@ -25,8 +25,8 @@ public class UserRepositoryTest {
 
     @Test
     public void checkOfGettingUserByName() {
-       String ACTUAL_NAME = dao.getUser(TEST_NAME).getName();
-       assertThat(ACTUAL_NAME, is(equalTo(TEST_NAME)));
+       final Users USER = dao.getUser(TEST_NAME);
+       assertNotNull(USER);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class UserRepositoryTest {
     public void checkOfRemovingUserByName(){
         dao.removeUser(TEST_NAME);
         final Users USER = dao.getUser(TEST_NAME);
-        assertThat(USER, is(nullValue(Users.class)));
+        assertNull(USER);
     }
 
     @After

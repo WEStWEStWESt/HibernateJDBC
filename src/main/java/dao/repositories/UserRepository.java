@@ -12,9 +12,11 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
     public Users getUser(String name){
         String screen = "%";
         Session session = getSession();
+        Transaction transaction = session.beginTransaction();
         Users user = (Users) session.createQuery(HqlQuery.SELECT_USER_BY_NAME.getHql())
                                     .setParameter("name", screen + name + screen)
                                     .uniqueResult();
+        transaction.commit();
         session.close();
         return user;
     }
@@ -34,11 +36,7 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
     public void removeUser(String name){
         Users user;
         if ((user = getUser(name)) != null){
-            Session session = getSession();
-            Transaction transaction = session.beginTransaction();
-            session.delete(user);
-            transaction.commit();
-            session.close();
+           removeEntity(user);
         }
     }
 }
