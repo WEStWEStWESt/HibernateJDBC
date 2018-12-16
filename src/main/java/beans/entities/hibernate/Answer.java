@@ -1,4 +1,4 @@
-package dao.entity;
+package beans.entities.hibernate;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "answers")
-public class Answers {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq")
@@ -22,10 +22,10 @@ public class Answers {
                orphanRemoval = true)
     private List<Link> links;
 
-    public Answers() {
+    public Answer() {
     }
 
-    public Answers(String answer) {
+    public Answer(String answer) {
         this.answer = answer;
     }
 

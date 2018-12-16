@@ -1,6 +1,6 @@
 package dao.impl;
 /*
-import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Answer;
 import utils.sections.SqlQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class AnswerTableImplementation extends AbstractTableImplementation {
 
-    public int addAnswer(Answers answers, Connection connection) throws SQLException {
+    public int addAnswer(Answer answers, Connection connection) throws SQLException {
         int result = 0;
         String answer = answers.getAnswer();
         if (selectEntity(answer,

@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.User;
 import dao.repositories.interfaces.IUserRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class UserRepositoryTest {
 
     @Test
     public void checkOfGettingUserByName() {
-       final Users USER = dao.getUser(TEST_NAME);
+       final User USER = dao.getUser(TEST_NAME);
        assertNotNull(USER);
     }
 
@@ -36,7 +36,7 @@ public class UserRepositoryTest {
     @Test
     public void checkOfRemovingUserByName(){
         dao.removeUser(TEST_NAME);
-        final Users USER = dao.getUser(TEST_NAME);
+        final User USER = dao.getUser(TEST_NAME);
         assertNull(USER);
     }
 

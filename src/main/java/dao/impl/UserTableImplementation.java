@@ -2,7 +2,7 @@ package dao.impl;
 /*
 import dao.driver.JdbcManagerConnectionPool;
 import beans.entities.hibernate.Link;
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.IUser;
 import utils.sections.SqlQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserTableImplementation extends AbstractTableImplementation{
 
-    public int addUser(Users users) throws SQLException {
+    public int addUser(IUser users) throws SQLException {
         int result = 0;
         String name;
         try (Connection connection = JdbcManagerConnectionPool.getInstance().connection()) {
@@ -27,12 +27,12 @@ public class UserTableImplementation extends AbstractTableImplementation{
         return result;
     }
 
-    public Users getUser(String name) throws SQLException {
+    public IUser getUser(String name) throws SQLException {
         try (Connection connection = JdbcManagerConnectionPool.getInstance().connection()) {
-            Users user = null;
+            IUser user = null;
             int id;
             if ((id = selectEntity(name, SqlQuery.SELECT_USER.getSql(), connection)) > -1) {
-                user = new Users(id, name);
+                user = new IUser(id, name);
             }
             return user ;
         }

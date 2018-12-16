@@ -1,11 +1,19 @@
 package dao.repositories.interfaces;
 
+import beans.entities.hibernate.Answer;
 import beans.entities.hibernate.Link;
+import beans.entities.hibernate.Question;
+import beans.entities.hibernate.User;
+
+import java.util.List;
 
 public interface ILinkRepository {
-    Link getLink(String link);
+    
+    List<Link> getLink(User user);
+    List<Link> getLink(User user, Question question);
 
-    void addLink(String link);
+    void addLink(Link link);
+    void updateLink(User user, Question question, Answer answer);
 
-    void removeLink(String link);
+    void removeLink(Link link);
 }

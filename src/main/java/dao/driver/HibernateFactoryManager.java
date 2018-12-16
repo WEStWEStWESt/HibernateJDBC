@@ -1,9 +1,9 @@
 package dao.driver;
 
-import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Answer;
 import beans.entities.hibernate.Link;
-import beans.entities.hibernate.Questions;
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.Question;
+import beans.entities.hibernate.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -16,9 +16,9 @@ public class HibernateFactoryManager {
 
     private HibernateFactoryManager() {
         Configuration configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(Users.class);
-        configuration.addAnnotatedClass(Questions.class);
-        configuration.addAnnotatedClass(Answers.class);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Question.class);
+        configuration.addAnnotatedClass(Answer.class);
         configuration.addAnnotatedClass(Link.class);
 
         StandardServiceRegistryBuilder builder =

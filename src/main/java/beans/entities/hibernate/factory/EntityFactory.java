@@ -1,8 +1,8 @@
 package beans.entities.hibernate.factory;
 
-import beans.entities.hibernate.Answers;
-import beans.entities.hibernate.Questions;
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.Answer;
+import beans.entities.hibernate.Question;
+import beans.entities.hibernate.User;
 
 public class EntityFactory {
 
@@ -10,19 +10,19 @@ public class EntityFactory {
         USERS {
             @Override
             Object createEntity(String value) {
-                return new Users(value);
+                return new User(value);
             }
         },
         QUESTIONS {
             @Override
             Object createEntity(String value) {
-                return new Questions(value);
+                return new Question(value);
             }
         },
         ANSWERS {
             @Override
             Object createEntity(String value) {
-                return new Answers(value);
+                return new Answer(value);
             }
         };
 

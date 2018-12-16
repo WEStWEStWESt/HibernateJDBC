@@ -12,27 +12,27 @@ public class Link {
     @SequenceGenerator(name = "gen_seq", sequenceName = "links_seq", allocationSize = 1)
     private int id;
 
-    @ManyToOne(targetEntity = Users.class)
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
-    @ManyToOne(targetEntity = Questions.class)
+    @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id", nullable = false)
-    private Questions question;
+    private Question question;
 
-    @ManyToOne(targetEntity = Answers.class)
+    @ManyToOne(targetEntity = Answer.class)
     @JoinColumn(name = "answer_id")
-    private Answers answer;
+    private Answer answer;
 
     public Link() {
     }
 
-    public Link(Users user, Questions question) {
+    public Link(User user, Question question) {
         this.user = user;
         this.question = question;
     }
 
-    public Link(Users user, Questions question, Answers answer) {
+    public Link(User user, Question question, Answer answer) {
         this.user = user;
         this.question = question;
         this.answer = answer;
@@ -46,27 +46,27 @@ public class Link {
         this.id = id;
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Questions getQuestion() {
+    public Question getQuestion() {
         return question;
     }
 
-    public void setQuestion(Questions question) {
+    public void setQuestion(Question question) {
         this.question = question;
     }
 
-    public Answers getAnswer() {
+    public Answer getAnswer() {
         return answer;
     }
 
-    public void setAnswer(Answers answer) {
+    public void setAnswer(Answer answer) {
         this.answer = answer;
     }
 

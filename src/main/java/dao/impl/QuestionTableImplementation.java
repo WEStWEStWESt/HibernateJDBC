@@ -2,7 +2,7 @@ package dao.impl;
 /*
 import dao.driver.JdbcManagerConnectionPool;
 import beans.entities.hibernate.Link;
-import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Question;
 import utils.sections.SqlQuery;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class QuestionTableImplementation extends AbstractTableImplementation {
 
-    public int addQuestion(Questions questions, Connection connection) throws SQLException {
+    public int addQuestion(Question questions, Connection connection) throws SQLException {
         int result = 0;
         String question = questions.getQuestion();
         if (selectEntity(question,

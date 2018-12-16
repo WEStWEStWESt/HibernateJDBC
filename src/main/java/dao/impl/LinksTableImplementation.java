@@ -1,10 +1,10 @@
 package dao.impl;
 /*
 import dao.driver.JdbcManagerConnectionPool;
-import beans.entities.hibernate.Answers;
+import beans.entities.hibernate.Answer;
 import beans.entities.hibernate.Link;
-import beans.entities.hibernate.Questions;
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.Question;
+import beans.entities.hibernate.IUser;
 import utils.sections.SqlQuery;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
     private final String QUESTION_ID = "question_id";
     private final String ANSWER_ID = "answer_id";
 
-    public int askQuestion(Users user, Questions question) throws SQLException {
+    public int askQuestion(IUser user, Question question) throws SQLException {
         Connection connection = null;
         int result = 0;
         int userId;
@@ -45,7 +45,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
                 if ((questionId = selectEntity(content,
                         SqlQuery.SELECT_QUESTION.getSql(),
                         connection)) > -1) {
-                    question = new Questions(questionId, content);
+                    question = new Question(questionId, content);
                 }
             }
             result = insertLink(user, question, connection);
@@ -94,7 +94,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
                 throw new SQLException("*** The question is not asked");
             }
 
-            Answers answer = new Answers(answerValue);
+            Answer answer = new Answer(answerValue);
             new AnswerTableImplementation().addAnswer(answer, connection);
 
             answerId = selectEntity(answerValue, SqlQuery.SELECT_ANSWER.getSql(), connection);
@@ -160,7 +160,7 @@ public class LinksTableImplementation extends AbstractTableImplementation {
         return link;
     }
 
-    private int insertLink(Users user, Questions question, Connection connection) throws SQLException {
+    private int insertLink(IUser user, Question question, Connection connection) throws SQLException {
         int userId = user.getId();
         int questionId = question.getId();
         int result = 0;

@@ -4,7 +4,7 @@ import beans.entities.hibernate.Link;
 
 import java.util.List;
 
-public interface User {
+public interface IUser {
     void setId(long id);
 
     long getId();

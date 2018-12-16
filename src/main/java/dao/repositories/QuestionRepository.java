@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Question;
 import dao.repositories.interfaces.IQuestionRepository;
 import utils.sections.HqlQuery;
 import org.hibernate.Session;
@@ -9,11 +9,11 @@ import org.hibernate.Transaction;
 public class QuestionRepository extends AbstractRepository implements IQuestionRepository {
 
     @Override
-    public Questions getQuestion(String value) {
+    public Question getQuestion(String value) {
         String screen = "%";
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        Questions question = (Questions)
+        Question question = (Question)
                              session.createQuery(HqlQuery.SELECT_QUESTION.getHql())
                             .setParameter("question", screen + value + screen)
                             .uniqueResult();
@@ -27,7 +27,7 @@ public class QuestionRepository extends AbstractRepository implements IQuestionR
         if (getQuestion(question) == null){
             Session session = getSession();
             Transaction transaction = session.beginTransaction();
-            session.save(new Questions(question));
+            session.save(new Question(question));
             transaction.commit();
             session.close();
         }
@@ -35,7 +35,7 @@ public class QuestionRepository extends AbstractRepository implements IQuestionR
 
     @Override
     public void removeQuestion(String value) {
-        Questions question;
+        Question question;
         if ((question = getQuestion(value)) != null){
            removeEntity(question);
         }

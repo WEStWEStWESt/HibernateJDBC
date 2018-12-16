@@ -1,12 +1,12 @@
 package beans.entities;
 
-import beans.entities.interfaces.User;
+import beans.entities.interfaces.IUser;
 
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AbstractEntity implements User {
+public abstract class AbstractEntity implements IUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quest_seq")

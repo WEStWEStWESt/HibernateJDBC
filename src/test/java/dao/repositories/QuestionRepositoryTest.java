@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import beans.entities.hibernate.Questions;
+import beans.entities.hibernate.Question;
 import dao.repositories.interfaces.IQuestionRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class QuestionRepositoryTest {
 
     @Test
     public void getQuestion() {
-        final Questions QUESTION = repository.getQuestion(TEST_QUESTION);
+        final Question QUESTION = repository.getQuestion(TEST_QUESTION);
         assertNotNull(QUESTION);
     }
 
@@ -42,7 +42,7 @@ public class QuestionRepositoryTest {
     @Test
     public void removeQuestion() {
         repository.removeQuestion(TEST_QUESTION);
-        final Questions NULL_QUESTION = repository.getQuestion(TEST_QUESTION);
+        final Question NULL_QUESTION = repository.getQuestion(TEST_QUESTION);
         assertNull(NULL_QUESTION);
     }
 }

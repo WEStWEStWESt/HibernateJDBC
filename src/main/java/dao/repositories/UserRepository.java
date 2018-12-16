@@ -1,6 +1,6 @@
 package dao.repositories;
 
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.User;
 import dao.repositories.interfaces.IUserRepository;
 import utils.sections.HqlQuery;
 import org.hibernate.Session;
@@ -9,11 +9,11 @@ import org.hibernate.Transaction;
 public class UserRepository extends AbstractRepository implements IUserRepository {
 
     @Override
-    public Users getUser(String name){
+    public User getUser(String name){
         String screen = "%";
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
-        Users user = (Users) session.createQuery(HqlQuery.SELECT_USER_BY_NAME.getHql())
+        User user = (User) session.createQuery(HqlQuery.SELECT_USER_BY_NAME.getHql())
                                     .setParameter("name", screen + name + screen)
                                     .uniqueResult();
         transaction.commit();
@@ -26,7 +26,7 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
         if (getUser(name) == null) {
             Session session = getSession();
             Transaction transaction = session.beginTransaction();
-            session.save(new Users(name));
+            session.save(new User(name));
             transaction.commit();
             session.close();
         }
@@ -34,7 +34,7 @@ public class UserRepository extends AbstractRepository implements IUserRepositor
 
     @Override
     public void removeUser(String name){
-        Users user;
+        User user;
         if ((user = getUser(name)) != null){
            removeEntity(user);
         }

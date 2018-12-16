@@ -1,14 +1,12 @@
 package beans.entities.hibernate;
 
-import beans.entities.interfaces.User;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class Users implements User {
+public class User {
 
     @Id
     @Column(name = "id")
@@ -25,34 +23,30 @@ public class Users implements User {
                orphanRemoval = true)
     private List<Link> links;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String name) {
+    public User(String name) {
         this.name = name;
     }
 
-    public Users(int id, String name) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }

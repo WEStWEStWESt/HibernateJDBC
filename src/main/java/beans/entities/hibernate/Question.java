@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "questions")
-public class Questions {
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quest_seq")
@@ -22,10 +22,10 @@ public class Questions {
                orphanRemoval = true)
     private List<Link> links;
 
-    public Questions() {
+    public Question() {
     }
 
-    public Questions(String question) {
+    public Question(String question) {
         this.question = question;
     }
 

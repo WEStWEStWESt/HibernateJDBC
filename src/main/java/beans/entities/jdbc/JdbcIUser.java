@@ -5,13 +5,13 @@ import beans.entities.hibernate.Link;
 
 import java.util.List;
 
-public class JdbcUser extends AbstractEntity {
+public class JdbcIUser extends AbstractEntity {
     private String name;
 
-    public JdbcUser() {
+    public JdbcIUser() {
     }
 
-    public JdbcUser(String name) {
+    public JdbcIUser(String name) {
         this.name = name;
     }
 

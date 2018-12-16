@@ -1,8 +1,8 @@
 /*import dao.driver.HibernateFactoryManager;
 import dao.driver.JdbcManagerConnectionPool;
-import beans.entities.hibernate.Answers;
-import beans.entities.hibernate.Questions;
-import beans.entities.hibernate.Users;
+import beans.entities.hibernate.Answer;
+import beans.entities.hibernate.Question;
+import beans.entities.hibernate.IUser;
 import dao.impl.AnswerTableImplementation;
 import dao.impl.LinksTableImplementation;
 import dao.impl.QuestionTableImplementation;
@@ -15,15 +15,15 @@ public class Main {
 
  /*      Connection connection = JdbcManagerConnectionPool.getInstance().connection();
 
-        System.out.println(new UserTableImplementation().addUser(new Users("ZMEY")));
+        System.out.println(new UserTableImplementation().addUser(new IUser("ZMEY")));
 
         System.out.println(new LinksTableImplementation().askQuestion(
-                new Users("ZMEY"),
-                new Questions("???")
+                new IUser("ZMEY"),
+                new Question("???")
         ));
 
         System.out.println(new AnswerTableImplementation().addAnswer(
-                           new Answers("!!!"), connection));
+                           new Answer("!!!"), connection));
         //new QuestionTableImplementation().removeQuestion("Hi, what`s up?");
 
         System.out.println(new LinksTableImplementation().
