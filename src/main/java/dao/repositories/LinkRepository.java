@@ -5,6 +5,8 @@ import beans.entities.hibernate.Link;
 import beans.entities.hibernate.Question;
 import beans.entities.hibernate.User;
 import dao.repositories.interfaces.ILinkRepository;
+import dao.repositories.interfaces.IQuestionRepository;
+import dao.repositories.interfaces.IUserRepository;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -16,8 +18,8 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class LinkRepository extends AbstractRepository implements ILinkRepository {
 
-    private UserRepository userRepository;
-    private QuestionRepository questionRepository;
+    private IUserRepository userRepository;
+    private IQuestionRepository questionRepository;
 
     public LinkRepository() {
         userRepository = new UserRepository();
@@ -44,13 +46,8 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createSQLQuery(
-                "SELECT * links " +
-                   "WHERE user_id = :user_id" +
-                   "AND question_id = :question_id");
-
-        query.setParameter("user_id", user.getId());
-        query.setParameter("question_id", question.getId());
+        Query query = session.createQuery(
+                "FROM Link WHERE user_id = " + user.getId() + "AND question_id = " + question.getId());
 
         List objects = query.getResultList();
 
@@ -89,6 +86,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         session.close();
     }
 
+    @Override
     public void askQuestion(User user, Question question){
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
@@ -110,6 +108,11 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
             transaction.commit();
         }
         session.close();
+    }
+
+    @Override
+    public void answerQuestion(User user, Question question, Answer answer) {
+
     }
 
     @Override

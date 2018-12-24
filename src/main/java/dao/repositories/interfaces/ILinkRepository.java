@@ -16,4 +16,8 @@ public interface ILinkRepository {
     void updateLink(User user, Question question, Answer answer);
 
     void removeLink(Link link);
+
+    void askQuestion(User user, Question question);
+
+    void answerQuestion(User user, Question question, Answer answer);
 }
