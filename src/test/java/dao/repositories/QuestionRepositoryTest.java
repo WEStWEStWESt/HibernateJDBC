@@ -16,13 +16,13 @@ public class QuestionRepositoryTest {
     private IQuestionRepository repository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         repository = new QuestionRepository();
         repository.addQuestion(TEST_QUESTION);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         repository.removeQuestion(TEST_QUESTION);
     }
 

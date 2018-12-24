@@ -13,7 +13,8 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
- /*      Connection connection = JdbcManagerConnectionPool.getInstance().connection();
+
+        /*Connection connection = JdbcManagerConnectionPool.getInstance().connection();
 
         System.out.println(new UserTableImplementation().addUser(new IUser("ZMEY")));
 
@@ -27,14 +28,12 @@ public class Main {
         //new QuestionTableImplementation().removeQuestion("Hi, what`s up?");
 
         System.out.println(new LinksTableImplementation().
-               answerQuestion("ZMEY", "???", "!!!"));
-*/
+               answerQuestion("ZMEY", "???", "!!!"));*/
 
 
         //System.out.println(new LinksTableImplementation().getStatistics());
         //System.out.println(new UserTableImplementation().getUser("WESt"));
         //new AnswerTableImplementation().deleteAnswer(1, connection);
-        //new UserTableImplementation().removeUser("WESt");
 
     }
 }

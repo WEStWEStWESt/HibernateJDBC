@@ -16,6 +16,14 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class LinkRepository extends AbstractRepository implements ILinkRepository {
 
+    private UserRepository userRepository;
+    private QuestionRepository questionRepository;
+
+    public LinkRepository() {
+        userRepository = new UserRepository();
+        questionRepository = new QuestionRepository();
+    }
+
     @Override
     public List<Link> getLink(User user) {
 
@@ -78,6 +86,29 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
         query.executeUpdate();
         transaction.commit();
+        session.close();
+    }
+
+    public void askQuestion(User user, Question question){
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+
+        if ((user = userRepository.getUser(user.getName())) == null) {
+            transaction.rollback();
+        } else {
+            String value = question.getQuestion();
+            if (questionRepository.getQuestion(value) == null){
+                questionRepository.addQuestion(value);
+            }
+
+            question = questionRepository.getQuestion(value);
+
+            if (getLink(user, question) == null){
+                addLink(new Link(user, question));
+            }
+
+            transaction.commit();
+        }
         session.close();
     }
 
