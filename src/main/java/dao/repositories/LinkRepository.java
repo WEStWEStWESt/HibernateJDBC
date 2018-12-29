@@ -4,6 +4,7 @@ import beans.entities.hibernate.Answer;
 import beans.entities.hibernate.Link;
 import beans.entities.hibernate.Question;
 import beans.entities.hibernate.User;
+import dao.repositories.interfaces.IAnswerRepository;
 import dao.repositories.interfaces.ILinkRepository;
 import dao.repositories.interfaces.IQuestionRepository;
 import dao.repositories.interfaces.IUserRepository;
@@ -20,6 +21,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
     private IUserRepository userRepository;
     private IQuestionRepository questionRepository;
+    private IAnswerRepository answerRepository;
 
     public LinkRepository() {
         userRepository = new UserRepository();
@@ -47,13 +49,31 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         Transaction transaction = session.beginTransaction();
 
         Query query = session.createQuery(
-                "FROM Link WHERE user_id = " + user.getId() + "AND question_id = " + question.getId());
+                "FROM Link WHERE user_id = " + user.getId() +
+                   "AND question_id = " + question.getId());
 
         List objects = query.getResultList();
 
         transaction.commit();
         session.close();
         return castToLinkList(objects);
+    }
+
+    @Override
+    public List<Link> getLink(User user, Question question, Answer answer) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery(
+                "FROM Link WHERE user_id = " + user.getName() +
+                   "AND question_id = " + question.getQuestion() +
+                   "AND answer_id = " + answer.getAnswer());
+
+        List object = query.getResultList();
+
+        transaction.commit();
+        session.close();
+        return castToLinkList(object);
     }
 
     @Override
@@ -94,12 +114,12 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         if ((user = userRepository.getUser(user.getName())) == null) {
             transaction.rollback();
         } else {
-            String value = question.getQuestion();
-            if (questionRepository.getQuestion(value) == null){
-                questionRepository.addQuestion(value);
+            String valueQuestion = question.getQuestion();
+            if (questionRepository.getQuestion(valueQuestion) == null){
+                questionRepository.addQuestion(valueQuestion);
             }
 
-            question = questionRepository.getQuestion(value);
+            question = questionRepository.getQuestion(valueQuestion);
 
             if (getLink(user, question) == null){
                 addLink(new Link(user, question));
@@ -112,7 +132,19 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
     @Override
     public void answerQuestion(User user, Question question, Answer answer) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
 
+        if (((user = userRepository.getUser(user.getName())) == null) ){
+            transaction.rollback();
+        }else if(getLink(user, question) != null){
+            String valueAnswer = answer.getAnswer();
+            answerRepository.addAnswer(valueAnswer);
+            updateLink(user, question, answer);
+            transaction.commit();
+        }
+
+        session.close();
     }
 
     @Override

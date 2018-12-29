@@ -11,6 +11,7 @@ public interface ILinkRepository {
     
     List<Link> getLink(User user);
     List<Link> getLink(User user, Question question);
+    List<Link> getLink(User user, Question question, Answer answer);
 
     void addLink(Link link);
     void updateLink(User user, Question question, Answer answer);

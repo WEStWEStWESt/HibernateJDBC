@@ -13,6 +13,36 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
+/*  private static String TEST_VALUE = "test";
+    private IUserRepository userRepository;
+    private IQuestionRepository questionRepository;
+
+    @Before
+    public void setUp() {
+        userRepository = new UserRepository();
+        questionRepository = new QuestionRepository();
+        userRepository.addUser(TEST_VALUE);
+    }
+
+    @After
+    public void tearDown() {
+        userRepository.removeUser(TEST_VALUE);
+    }
+
+    @Test
+    @SuppressWarnings("ALL")
+    public void askQuestion() {
+        ILinkRepository repository = new LinkRepository();
+        User user = userRepository.getUser(TEST_VALUE);
+        questionRepository.addQuestion(TEST_VALUE);
+
+        Question question = questionRepository.getQuestion(TEST_VALUE);
+        repository.askQuestion(user, question);
+
+        final List<Link> ACTUAL_LINK = repository.getLink(user, question);
+        assertNotNull(ACTUAL_LINK);
+    }*/
+
 
         /*Connection connection = JdbcManagerConnectionPool.getInstance().connection();
 
