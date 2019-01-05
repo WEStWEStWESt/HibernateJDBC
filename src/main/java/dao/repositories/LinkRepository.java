@@ -77,6 +77,10 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         return castToLinkList(object);
     }
 
+    public List<Link> getStatistics() {
+        return castToLinkList(getSession().createQuery("FROM Link").getResultList());
+    }
+
     @Override
     public void addLink(Link link) {
         Session session = getSession();

@@ -1,5 +1,7 @@
 package beans.entities.hibernate;
 
+import utils.converters.UserNameConverter;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.List;
@@ -14,6 +16,7 @@ public class User {
     @SequenceGenerator(name = "gen_seq", sequenceName = "user_seq", allocationSize = 1)
     private int id;
 
+    @Convert(converter = UserNameConverter.class)
     @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
 
