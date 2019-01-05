@@ -26,6 +26,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
     public LinkRepository() {
         userRepository = new UserRepository();
         questionRepository = new QuestionRepository();
+        answerRepository = new AnswerRepository();
     }
 
     @Override
@@ -35,7 +36,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         Transaction transaction = session.beginTransaction();
 
         List objects =
-                 session.createQuery(HqlQuery.SELECT_LINK_BY_USER.getHql())
+                session.createQuery(HqlQuery.SELECT_LINK_BY_USER.getHql())
                         .setParameter("user", user)
                         .getResultList();
         transaction.commit();
@@ -50,7 +51,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
         Query query = session.createQuery(
                 "FROM Link WHERE user_id = " + user.getId() +
-                   "AND question_id = " + question.getId());
+                        "AND question_id = " + question.getId());
 
         List objects = query.getResultList();
 
@@ -65,9 +66,9 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         Transaction transaction = session.beginTransaction();
 
         Query query = session.createQuery(
-                "FROM Link WHERE user_id = " + user.getName() +
-                   "AND question_id = " + question.getQuestion() +
-                   "AND answer_id = " + answer.getAnswer());
+                "FROM Link WHERE user_id = " + user.getId() +
+                        "AND question_id = " + question.getId() +
+                        "AND answer_id = " + answer.getId());
 
         List object = query.getResultList();
 
@@ -92,10 +93,10 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
         Query query = session.createSQLQuery(
                 "UPDATE INTO links " +
-                "SET answer_id = :answer_id" +
-                "WHERE user_id = :user_id" +
-                "AND question_id = :question_id" +
-                "AND answer_id IS NULL");
+                        "SET answer_id = :answer_id" +
+                        "WHERE user_id = :user_id" +
+                        "AND question_id = :question_id" +
+                        "AND answer_id IS NULL");
 
         query.setParameter("answer_id", answer.getId());
         query.setParameter("user_id", user.getId());
@@ -107,7 +108,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
     }
 
     @Override
-    public void askQuestion(User user, Question question){
+    public void askQuestion(User user, Question question) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -115,13 +116,13 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
             transaction.rollback();
         } else {
             String valueQuestion = question.getQuestion();
-            if (questionRepository.getQuestion(valueQuestion) == null){
+            if (questionRepository.getQuestion(valueQuestion) == null) {
                 questionRepository.addQuestion(valueQuestion);
             }
 
             question = questionRepository.getQuestion(valueQuestion);
 
-            if (getLink(user, question) == null){
+            if (getLink(user, question) == null) {
                 addLink(new Link(user, question));
             }
 
@@ -132,15 +133,27 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
 
     @Override
     public void answerQuestion(User user, Question question, Answer answer) {
+        List<Link> links;
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
 
-        if (((user = userRepository.getUser(user.getName())) == null) ){
+        if (((user = userRepository.getUser(user.getName())) == null)) {
             transaction.rollback();
-        }else if(getLink(user, question) != null){
+        } else if ((links = getLink(user, question)) != null) {
+            Link actualLink =
+                    links.stream()
+                            .filter(link -> link.getAnswer() == null)
+                            .findAny()
+                            .orElse(null);
+            if (actualLink == null) {
+                transaction.rollback();
+            }
             String valueAnswer = answer.getAnswer();
             answerRepository.addAnswer(valueAnswer);
-            updateLink(user, question, answer);
+
+            answer = answerRepository.getAnswer(valueAnswer);
+            actualLink.setAnswer(answer);
+            session.save(actualLink);
             transaction.commit();
         }
 
@@ -152,7 +165,7 @@ public class LinkRepository extends AbstractRepository implements ILinkRepositor
         removeEntity(link);
     }
 
-    private  List<Link> castToLinkList(List objects) {
+    private List<Link> castToLinkList(List objects) {
         List<Link> links = new ArrayList<>();
         objects.forEach(o -> links.add((Link) o));
         return links.size() > 0 ? links : null;

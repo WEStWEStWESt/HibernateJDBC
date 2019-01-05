@@ -41,11 +41,9 @@ public class LinkRepositoryTest {
     public void askQuestion() {
         ILinkRepository repository = new LinkRepository();
         User user = userRepository.getUser(TEST_VALUE);
-        questionRepository.addQuestion(TEST_VALUE);
 
+        repository.askQuestion(user, new Question(TEST_VALUE));
         Question question = questionRepository.getQuestion(TEST_VALUE);
-        repository.askQuestion(user, question);
-
         final List<Link> ACTUAL_LINK = repository.getLink(user, question);
         assertNotNull(ACTUAL_LINK);
     }
@@ -56,17 +54,12 @@ public class LinkRepositoryTest {
 
         ILinkRepository repository = new LinkRepository();
         User user = userRepository.getUser(TEST_VALUE);
-        questionRepository.addQuestion(TEST_VALUE);
-        answerRepository.addAnswer(TEST_VALUE);
+        repository.askQuestion(user, new Question(TEST_VALUE));
 
         Question question = questionRepository.getQuestion(TEST_VALUE);
-        repository.askQuestion(user, question);
-
-        final List<Link> ACTUAL_LINK = repository.getLink(user, question);
-        assertNotNull(ACTUAL_LINK);
+        repository.answerQuestion(user, question, new Answer(TEST_VALUE));
 
         Answer answer = answerRepository.getAnswer(TEST_VALUE);
-        answer.setAnswer(TEST_VALUE);
 
         final List<Link> ACTUAL_LINKs = repository.getLink(user, question, answer);
         assertNotNull(ACTUAL_LINKs);
