@@ -1,11 +1,13 @@
 package beans.entities.hibernate;
 
 import beans.entities.hibernate.profiles.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import utils.converters.UserNameConverter;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +23,7 @@ public class User {
     @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Profile profile;
 
@@ -73,5 +76,19 @@ public class User {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
