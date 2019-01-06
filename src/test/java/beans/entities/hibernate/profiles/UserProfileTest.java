@@ -24,7 +24,6 @@ public class UserProfileTest{
 
         profileRepository = new ProfileService();
         userProfile = new UserProfile();
-        userProfile.setId(1);
         userProfile.setUser(userRepository.getUser(TEST_NAME));
         userProfile.setPassportKey("123");
 
@@ -38,6 +37,6 @@ public class UserProfileTest{
 
     @Test
     public void g() {
-        assertNotNull(profileRepository.getUserProfile(userProfile));
+        assertNotNull(profileRepository.getUserProfileByUser(userProfile));
     }
 }
