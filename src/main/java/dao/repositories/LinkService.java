@@ -17,16 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class LinkRepository extends AbstractRepository implements ILinkRepository {
+public class LinkService extends AbstractService implements ILinkRepository {
 
     private IUserRepository userRepository;
     private IQuestionRepository questionRepository;
     private IAnswerRepository answerRepository;
 
-    public LinkRepository() {
-        userRepository = new UserRepository();
-        questionRepository = new QuestionRepository();
-        answerRepository = new AnswerRepository();
+    public LinkService() {
+        userRepository = new UserService();
+        questionRepository = new QuestionService();
+        answerRepository = new AnswerService();
     }
 
     @Override

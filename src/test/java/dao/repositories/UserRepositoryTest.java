@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
 
 public class UserRepositoryTest {
 
-    private static String TEST_NAME = "test_name";
+    private static String TEST_NAME = "Test_name";
     private IUserRepository dao;
 
     @Before
     public void setUp() {
-        dao = new UserRepository();
+        dao = new UserService();
         dao.addUser(TEST_NAME);
     }
 

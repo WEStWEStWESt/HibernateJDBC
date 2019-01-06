@@ -4,6 +4,8 @@ import beans.entities.hibernate.Answer;
 import beans.entities.hibernate.Link;
 import beans.entities.hibernate.Question;
 import beans.entities.hibernate.User;
+import beans.entities.hibernate.profiles.Profile;
+import beans.entities.hibernate.profiles.UserProfile;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -20,6 +22,8 @@ public class HibernateFactoryManager {
         configuration.addAnnotatedClass(Question.class);
         configuration.addAnnotatedClass(Answer.class);
         configuration.addAnnotatedClass(Link.class);
+        configuration.addAnnotatedClass(Profile.class);
+        configuration.addAnnotatedClass(UserProfile.class);
 
         StandardServiceRegistryBuilder builder =
                 new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());

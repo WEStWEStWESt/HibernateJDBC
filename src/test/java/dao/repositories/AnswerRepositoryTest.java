@@ -17,7 +17,7 @@ public class AnswerRepositoryTest {
 
     @Before
     public void setUp() {
-        repository = new AnswerRepository();
+        repository = new AnswerService();
         repository.addAnswer(TEST_ANSWER);
     }
 

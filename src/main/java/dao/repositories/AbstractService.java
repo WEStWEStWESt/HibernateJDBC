@@ -4,7 +4,7 @@ import dao.driver.HibernateFactoryManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public abstract class AbstractRepository {
+public abstract class AbstractService {
 
      Session getSession(){
         return HibernateFactoryManager.getInstance()

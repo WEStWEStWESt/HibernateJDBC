@@ -25,9 +25,9 @@ public class LinkRepositoryTest {
 
     @Before
     public void setUp() {
-        userRepository = new UserRepository();
-        questionRepository = new QuestionRepository();
-        answerRepository = new AnswerRepository();
+        userRepository = new UserService();
+        questionRepository = new QuestionService();
+        answerRepository = new AnswerService();
         userRepository.addUser(TEST_VALUE);
     }
 
@@ -39,7 +39,7 @@ public class LinkRepositoryTest {
     @Test
     @SuppressWarnings("ALL")
     public void askQuestion() {
-        ILinkRepository repository = new LinkRepository();
+        ILinkRepository repository = new LinkService();
         User user = userRepository.getUser(TEST_VALUE);
 
         repository.askQuestion(user, new Question(TEST_VALUE));
@@ -52,7 +52,7 @@ public class LinkRepositoryTest {
     @SuppressWarnings("ALL")
     public void answerQuestion() {
 
-        ILinkRepository repository = new LinkRepository();
+        ILinkRepository repository = new LinkService();
         User user = userRepository.getUser(TEST_VALUE);
         repository.askQuestion(user, new Question(TEST_VALUE));
 

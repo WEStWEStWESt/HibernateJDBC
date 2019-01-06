@@ -17,7 +17,7 @@ public class QuestionRepositoryTest {
 
     @Before
     public void setUp() {
-        repository = new QuestionRepository();
+        repository = new QuestionService();
         repository.addQuestion(TEST_QUESTION);
     }
 

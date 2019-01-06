@@ -1,5 +1,6 @@
 package beans.entities.hibernate;
 
+import beans.entities.hibernate.profiles.Profile;
 import utils.converters.UserNameConverter;
 
 import javax.persistence.*;
@@ -19,6 +20,9 @@ public class User {
     @Convert(converter = UserNameConverter.class)
     @Column(name = "name", nullable = false, unique = true, length = 20)
     private String name;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Profile profile;
 
     @OneToMany(targetEntity = Link.class,
                mappedBy = "user",
@@ -52,6 +56,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 
     public List<Link> getLinks() {

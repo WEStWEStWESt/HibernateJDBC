@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.sections.HqlQuery;
 
-public class AnswerRepository extends AbstractRepository implements IAnswerRepository {
+public class AnswerService extends AbstractService implements IAnswerRepository {
 
     @Override
     public Answer getAnswer(String value) {

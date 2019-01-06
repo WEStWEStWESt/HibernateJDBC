@@ -6,7 +6,7 @@ import utils.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UserRepository extends AbstractRepository implements IUserRepository {
+public class UserService extends AbstractService implements IUserRepository {
 
     @Override
     public User getUser(String name){

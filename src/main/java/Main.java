@@ -19,8 +19,8 @@ public class Main {
 
     @Before
     public void setUp() {
-        userRepository = new UserRepository();
-        questionRepository = new QuestionRepository();
+        userRepository = new UserService();
+        questionRepository = new QuestionService();
         userRepository.addUser(TEST_VALUE);
     }
 
@@ -32,7 +32,7 @@ public class Main {
     @Test
     @SuppressWarnings("ALL")
     public void askQuestion() {
-        ILinkRepository repository = new LinkRepository();
+        ILinkRepository repository = new LinkService();
         User user = userRepository.getUser(TEST_VALUE);
         questionRepository.addQuestion(TEST_VALUE);
 

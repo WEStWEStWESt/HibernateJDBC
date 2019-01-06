@@ -6,7 +6,7 @@ import utils.sections.HqlQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class QuestionRepository extends AbstractRepository implements IQuestionRepository {
+public class QuestionService extends AbstractService implements IQuestionRepository {
 
     @Override
     public Question getQuestion(String value) {
