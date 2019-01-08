@@ -3,6 +3,8 @@ package utils.converters;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+/*прописать в консоли БД: CREATE EXTENSION IF NOT EXISTS pgcrypto */
+
 @Converter
 public class UserNameConverter implements AttributeConverter<String, String> {
 
