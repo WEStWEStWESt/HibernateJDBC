@@ -36,7 +36,7 @@ public class UserProfileTest{
     }
 
     @Test
-    public void g() {
+    public void check_of_user_profile_exist() {
         assertNotNull(profileRepository.getUserProfileByUser(userProfile));
     }
 }

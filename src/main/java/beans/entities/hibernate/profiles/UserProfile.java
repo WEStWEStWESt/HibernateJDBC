@@ -9,6 +9,7 @@ import javax.persistence.*;
 @DiscriminatorValue("UP")
 public class UserProfile extends Profile {
 
+    /*call the command in postgresql console: CREATE EXTENSION IF NOT EXISTS pgcrypto */
     @Column(name = "passport_key")
     @ColumnTransformer(read = "pgp_sym_decrypt(passport_key::bytea, 'crypt')", write = "pgp_sym_encrypt(?, 'crypt')")
     private String passportKey;
