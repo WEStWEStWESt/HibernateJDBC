@@ -9,6 +9,7 @@ import beans.entities.hibernate.profiles.UserProfile;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import utils.interceptors.InterceptorsManager;
 
 public class HibernateFactoryManager {
 
@@ -24,6 +25,7 @@ public class HibernateFactoryManager {
         configuration.addAnnotatedClass(Link.class);
         configuration.addAnnotatedClass(Profile.class);
         configuration.addAnnotatedClass(UserProfile.class);
+        configuration.setInterceptor(new InterceptorsManager());
 
         StandardServiceRegistryBuilder builder =
                 new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());

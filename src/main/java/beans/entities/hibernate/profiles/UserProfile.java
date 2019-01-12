@@ -14,7 +14,14 @@ public class UserProfile extends Profile {
     @ColumnTransformer(read = "pgp_sym_decrypt(passport_key::bytea, 'crypt')", write = "pgp_sym_encrypt(?, 'crypt')")
     private String passportKey;
 
+    private int age;
+
     public UserProfile() {
+    }
+
+    public UserProfile(String passportKey, int age) {
+        setPassportKey(passportKey);
+        setAge(age);
     }
 
     public String getPassportKey() {
@@ -23,5 +30,13 @@ public class UserProfile extends Profile {
 
     public void setPassportKey(String passportKey) {
         this.passportKey = passportKey;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

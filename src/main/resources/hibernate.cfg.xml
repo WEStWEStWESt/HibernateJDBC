@@ -20,6 +20,9 @@
 
         <property name="hbm2ddl.auto">update</property>
         <property name="javax.persistence.schema-generation.database.action">create</property>
+
+
+
     </session-factory>
 
 </hibernate-configuration>
