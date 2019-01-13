@@ -17,12 +17,19 @@ public class Profile implements Comparable<Profile> {
     @SequenceGenerator(name = "profile_gen_seq", sequenceName = "profile_sequence", allocationSize = 1)
     private int id;
 
+    private int age;
+
     @JsonIgnore
     @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Profile() {
+    }
+
+    public Profile(int age, User user) {
+        setAge(age);
+        setUser(user);
     }
 
     public int getId() {
@@ -39,6 +46,14 @@ public class Profile implements Comparable<Profile> {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override

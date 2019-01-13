@@ -13,10 +13,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@SuppressWarnings("unchecked")
 public class InterceptorsManager extends EmptyInterceptor {
     private static final Class<Interceptor> TARGET_ANNOTATION = Interceptor.class;
     private static final String INSTANT_PATH = "utils/interceptors";
     private Map<Class<?>, Set> interceptors;
+    private Reflections reflection;
 
     public InterceptorsManager() {
         findInterceptors(INSTANT_PATH);
@@ -50,17 +52,23 @@ public class InterceptorsManager extends EmptyInterceptor {
         return interceptors;
     }
 
-    @SuppressWarnings("unchecked")
+    private void addToMap(Class key, Object value) {
+        Set currentEntityInterceptorsSet;
+        if ((currentEntityInterceptorsSet = interceptors.get(key)) == null) {
+            currentEntityInterceptorsSet = new HashSet<>();
+        }
+
+        currentEntityInterceptorsSet.add(value);
+        interceptors.put(key, currentEntityInterceptorsSet);
+    }
+
     private void findInterceptors(String path) {
         interceptors = new HashMap<>();
-        Reflections reflections = new Reflections(path);
-        Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(TARGET_ANNOTATION);
-        Set currentEntityInterceptorsSet;
+        reflection = new Reflections(path);
+        Set<Class<?>> annotated = reflection.getTypesAnnotatedWith(TARGET_ANNOTATION);
         for (Class<?> aClass : annotated) {
             Class<?> key = aClass.getAnnotation(TARGET_ANNOTATION).targetEntity();
-            if ((currentEntityInterceptorsSet = interceptors.get(key)) == null) {
-                currentEntityInterceptorsSet = new HashSet<>();
-            }
+
             Object interceptor = null;
             try {
                 interceptor = aClass.newInstance();
@@ -68,8 +76,34 @@ public class InterceptorsManager extends EmptyInterceptor {
                 System.out.println("*** Unknown interceptor type ***");
             }
 
-            currentEntityInterceptorsSet.add(interceptor);
-            interceptors.put(key, currentEntityInterceptorsSet);
+            EntitiesScopeRealizationType.valueOf(aClass.getAnnotation(TARGET_ANNOTATION).scope().name()).applyFor(this, key, interceptor);
         }
+    }
+
+    private enum EntitiesScopeRealizationType {
+        ALL {
+            @Override
+            void applyFor(InterceptorsManager manager, Class key, Object value) {
+                Set<Class<?>> subTypes = reflection.getSubTypesOf(Object.class);
+                subTypes.forEach(aClass -> manager.addToMap(aClass, value));
+            }
+        },
+        THIS {
+            @Override
+            void applyFor(InterceptorsManager manager, Class key, Object value) {
+                manager.addToMap(key, value);
+            }
+        },
+        WITH_SUB_CLASSES {
+            @Override
+            void applyFor(InterceptorsManager manager, Class key, Object value) {
+                Set<Class<?>> subTypes = reflection.getSubTypesOf(key);
+                THIS.applyFor(manager, key, value);
+                subTypes.forEach(aClass -> manager.addToMap(aClass, value));
+            }
+        };
+
+        private static Reflections reflection = new Reflections("beans/entities/hibernate");
+        abstract void applyFor(InterceptorsManager manager, Class key, Object value);
     }
 }
