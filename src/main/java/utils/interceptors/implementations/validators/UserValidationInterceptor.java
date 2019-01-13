@@ -7,7 +7,7 @@ import utils.interceptors.interfaces.ValidationInterceptor;
 public class UserValidationInterceptor implements ValidationInterceptor {
     @Override
     public void validate(Object entity) {
-        System.out.println("*** The entity saving ***");
+        System.out.println("*** The UserEntity saving ***");
         if (entity instanceof User) {
             User user = (User) entity;
             String name = user.getName();

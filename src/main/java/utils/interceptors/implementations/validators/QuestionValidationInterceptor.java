@@ -7,12 +7,12 @@ import utils.interceptors.interfaces.ValidationInterceptor;
 public class QuestionValidationInterceptor implements ValidationInterceptor {
     @Override
     public void validate(Object entity) {
-        System.out.println("*** The entity saving ***");
+        System.out.println("*** The QuestionEntity saving ***");
         if (entity instanceof Question) {
             Question question = (Question) entity;
             String value = question.getQuestion();
             if (value == null || value.isEmpty()) {
-                throw new EntityValidationException("*** Name field value is invalid ***");
+                throw new EntityValidationException("*** Question field value is invalid ***");
             }
         }
     }
