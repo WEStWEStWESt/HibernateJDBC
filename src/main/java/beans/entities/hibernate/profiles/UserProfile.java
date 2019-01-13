@@ -1,6 +1,5 @@
 package beans.entities.hibernate.profiles;
 
-import beans.entities.hibernate.User;
 import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;

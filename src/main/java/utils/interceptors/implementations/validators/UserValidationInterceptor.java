@@ -2,8 +2,10 @@ package utils.interceptors.implementations.validators;
 
 import beans.entities.hibernate.User;
 import exceptions.EntityValidationException;
+import utils.annotations.Interceptor;
 import utils.interceptors.interfaces.ValidationInterceptor;
 
+@Interceptor(targetEntity = User.class)
 public class UserValidationInterceptor implements ValidationInterceptor {
     @Override
     public void validate(Object entity) {
